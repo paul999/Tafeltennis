@@ -5,86 +5,7 @@ require('config.php');
 <html dir="ltr" lang="en-gb">
 <head>
 <meta charset="utf-8">
-  <style type="text/css">
- .success {  
-     display: none; /* hide the sucess div */  
-     /* add some styling */  
-     padding:10px;  
-     color: #044406;  
-     font-size:12px;  
-     background-color: #B7FBB9;  
- }
- 
- .error {  
- 	display:none;
-     /* add some styling */  
-     padding:10px;  
-     color: #044406;  
-     font-size:12px;  
-     background-color: red;  
- } 
- 
-
-/* jQuery popups
----------------------------------------- */
-.phpbb_alert {
-	background-color: #FFFFFF;
-	border: 1px solid #999999;
-	position: fixed;
-	display: none;
-	top: 100px;
-	left: 35%;
-	width: 30%;
-	z-index: 50;
-	padding: 25px;
-	padding: 0 25px 20px 25px;
-}
-
-.phpbb_alert img.alert_close {
-	float: right;
-	margin-top: -7px;
-	margin-right: -30px;
-}
-
-.phpbb_alert p {
-	margin: 8px 0;
-	padding-bottom: 8px;
-}
-
-#darkenwrapper {
-	display: none;
-}
-
-#darken {
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #000000;
-	opacity: 0.5;
-} 
-
-/* jQuery popups
----------------------------------------- */
-.jalert {
-	background-color: #FFFFFF;
-	border: 1px solid #999999;
-	position: fixed;
-	display: none;
-	top: 100px;
-	left: 35%;
-	width: 30%;
-	z-index: 50;
-	padding: 25px;
-	padding: 0 25px 20px 25px;
-}
-
-.jalert p {
-	margin: 8px 0;
-	padding-bottom: 8px;
-}
-	</style>
+  <style type="text/css" src="css/main.css"></style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
 	<script src="js/core.js" type="text/javascript"></script>
 	<?php
@@ -151,6 +72,118 @@ foreach ($levels as $lvl => $naam)
 			$has = true;
 		}
 		echo $naam;
+	}
+}
+?>
+
+<?php
+if (allow(array(speler, coach)))
+{
+	echo '<h1>Competitie overzicht</h1>';
+	$teams = teamAllow();
+	
+	if ($teams === false)
+	{
+		echo "Geen teams gevonden met toegang.";
+	}
+	else
+	{
+		if (sizeof($teams) == 1 && !isset($_SESSION['team']))
+		{
+			$_SESSION['team'] = $teams[0];
+		}
+	
+		if (sizeof($teams) > 1)
+		{
+			?>
+			<h2>Selecteer team</h2>
+			<p>Selecteer het team waarvan je het competitie overzicht wilt zien:</p>
+			<select id="teams">
+				<option>Selecteer team</option>
+				<?php
+				for ($i = 0; $i < sizeof($teams); $i++)
+				{
+					echo "<option value='{$teams['id']}'>{$teams['team']}</option>";
+				}
+				?>
+			</select>
+			
+			<?php
+		}
+		if (isset($_SESSION['team']))
+		{
+			// Hier competitie overzicht.
+			
+			$sql = 'SELECT * FROM wedstrijden WHERE team = ' . (int)$_SESSION['team'];
+			$result = mysql_query($sql) or sqlE();
+			
+			if (!mysql_num_rows($result))
+			{
+				echo "<p>Er zijn nog geen wedstrijden ingevuld voor dit team</p>";
+			}
+			else
+			{
+				$wedstrijden = array();
+				$ids = array();
+				$uitslagen = array();
+				$spelers = array();
+				$sp = array();
+				$speler = array();
+				while ($row = mysql_fetch_assoc($result))
+				{
+					$ids[] = $row['id']; // Selecteer uitslagen zo :)
+					$wedstrijden[] = $row;
+				}
+				
+				
+				if (sizeof($ids))
+				{
+					// Selecteer uitslagen voor deze wedstrijden.
+					$sql = 'SELECT * FROM uitslagen WHERE wedstrijd IN (' . implode($ids, ', ') . ')';
+					$result = mysql_query($sql) or sqlE();
+					
+					if (mysql_num_rows($result))
+					{
+						while ($row = mysql_fetch_assoc($result))
+						{
+							$uitslagen[$row['wedstrijd']] = $row;
+						}
+					}
+					
+					// Selecteer alle benodigde spelers enzo.
+					$sql = 'SELECTEER * FROM spelerwedstrijd WHERE wedstrijd IN (' . implode($ids, ', ') . ')';
+					$result = mysql_query($sql) or sqlE();
+					
+					if (mysql_num_rows($result))
+					{
+						while ($row = mysql_fetch_assoc($result))
+						{
+							$spelers[$row['wedstrijd']] = $row;
+							$sp[] = $row['spelerid'];
+						}
+					}
+				}
+				
+				if (sizeof($sp))
+				{
+					// Selecteer naamgegevens ed van spelers.
+					$sql = 'SELECT * FROM spelers WHERE id IN (' . implode($sp, ', ') . ')';
+					
+					$result = mysql_query($sql) or sqlE();
+					
+					if (mysql_num_rows($result))
+					{
+						while ($row = mysql_fetch_assoc($result))
+						{
+							$speler[$row['id']] = $row;
+						}
+					}
+				}
+				// Zo, alle data is daar. Nu overzichtjes maken.
+				
+				
+			}
+		}
 	}
 }
 ?>

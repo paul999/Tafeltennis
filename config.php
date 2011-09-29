@@ -1,5 +1,6 @@
 <?php
 require('../config.php');
+require('functions.php');
 
 session_start();
 
@@ -31,26 +32,7 @@ $levels = array(
 	32 => 'Speler',
 );
 
-function logged()
-{
-	return (isset($_SESSION['login']) && $_SESSION['login'] == true) ? true : false;
-}
 
-function allow($level, $die = true)
-{
-	global $levels;
-	if ($die)
-	{
-		if (!(level & $level))
-		{
-			displayError('Je hebt geen toegang tot deze functie. Voor deze functie is het toegangslevel ' . $levels[$level] . ' nodig.', 'Geen toegang');;
-		}
-	}
-	else
-	{
-		return (bool)(level & $level);
-	}
-}
 if (!isset($_SESSION['id']) || !is_numeric($_SESSION['id']) || $_SESSION['id'] <= 0)
 {
 	$_SESSION['login'] = false;
@@ -59,13 +41,8 @@ else
 {
 	$uid = (int)$_SESSION['id'];
 	$sql = 'SELECT * FROM users WHERE id = ' . $uid;
-	$result = @mysql_query($sql);
-	
-	if (!$result)
-	{
-		displayError('Er heeft een mySQL error opgetreden, neem contact op met de webmaster.<br />Error:<br />' . mysql_error(), 'mySQL Error');
-	}
-	
+	$result = @mysql_query($sql) or sqlE();
+
 	$data = @mysql_fetch_assoc($result);
 	define('LEVEL', $data['access'], true);
 	
@@ -76,17 +53,4 @@ else
 	
 }
 
-function displayError($msg, $tit = 'Error')
-{
-	if (function_exists('err'))
-	{
-		err($msg);
-		exit;
-	}
-	?>
-	<h1><?php echo $tit; ?></h1>
-	<p><?php echo $msg; ?></p>
-	</body></html>
-	<?php
-	exit;
-}
+
