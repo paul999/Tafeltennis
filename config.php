@@ -14,14 +14,31 @@ $d2 = mysql_select_db($db, $d) or die('ERROR: ' . mysql_error());
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+define('USER', 1, true);
+define('ADMIN', 2, true);
+define('COACH', 4, true);
+define('BEHEER', 8, true);
+define('OUDER', 16, true);
+define('SPELER', 32, true);
+
 function logged()
 {
 	return (isset($_SESSION['login']) && $_SESSION['login'] == true) ? true : false;
 }
 
-function allow($level)
+function allow($level, $die = true)
 {
-	
+	if ($die)
+	{
+		if (!(level & $level))
+		{
+			displayError('Je hebt geen toegang tot deze functie. Voor deze functie is het toegangslevel ' . $level . ' nodig.', 'Geen toegang');;
+		}
+	}
+	else
+	{
+		return (bool)(level & $level);
+	}
 }
 if (!isset($_SESSION['id']) || !is_numeric($_SESSION['id']) || $_SESSION['id'] <= 0)
 {
@@ -33,20 +50,32 @@ else
 	$sql = 'SELECT * FROM users WHERE id = ' . $uid;
 	$result = @mysql_query($sql);
 	
-	if (!$result && function_exists('err'))
+	if (!$result)
 	{
-		err(mysql_error());
-	}
-	else if (!$result)
-	{
-		?>
-		<h1>mySQL Error</h1>
-		<p>Er heeft een mySQL error opgetreden, neem contact op met de webmaster.<br />Error:<br /><?php echo mysql_error(); ?></p>
-		</body></html>
-		<?php
-		exit;
+		displayError('Er heeft een mySQL error opgetreden, neem contact op met de webmaster.<br />Error:<br />' . mysql_error(), 'mySQL Error');
 	}
 	
 	$data = @mysql_fetch_assoc($result);
+	define('LEVEL', $data['access'], true);
 	
+	if (!(level & USER))
+	{
+		displayError('Something went wrong, no user level set, but required.');	
+	}
+	
+}
+
+function displayError($msg, $tit = 'Error')
+{
+	if (function_exists('err'))
+	{
+		err($msg);
+		exit;
+	}
+	?>
+	<h1><?php echo $tit; ?></h1>
+	<p><?php echo $msg; ?></p>
+	</body></html>
+	<?php
+	exit;
 }
