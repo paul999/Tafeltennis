@@ -1,8 +1,5 @@
 <?php
-$user	= 'ttv';
-$pass	= '';
-$db		= 'ttv';
-$host	= 'mysql.hosthuis.nl';
+require('../config.php');
 
 session_start();
 
