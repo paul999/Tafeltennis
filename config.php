@@ -21,6 +21,16 @@ define('BEHEER', 8, true);
 define('OUDER', 16, true);
 define('SPELER', 32, true);
 
+//Beetje dubbelop maybe.
+$levels = array(
+	1 => 'User',
+	2 => 'Admin',
+	4 => 'Coach',
+	8 => 'Beheer',
+	16 => 'Ouder/verzorger',
+	32 => 'Speler',
+);
+
 function logged()
 {
 	return (isset($_SESSION['login']) && $_SESSION['login'] == true) ? true : false;
@@ -28,11 +38,12 @@ function logged()
 
 function allow($level, $die = true)
 {
+	global $levels;
 	if ($die)
 	{
 		if (!(level & $level))
 		{
-			displayError('Je hebt geen toegang tot deze functie. Voor deze functie is het toegangslevel ' . $level . ' nodig.', 'Geen toegang');;
+			displayError('Je hebt geen toegang tot deze functie. Voor deze functie is het toegangslevel ' . $levels[$level] . ' nodig.', 'Geen toegang');;
 		}
 	}
 	else

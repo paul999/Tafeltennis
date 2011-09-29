@@ -134,6 +134,27 @@ require('config.php');
     }
     ?>
     
+<h1>Hoi <?php echo $data['username']; ?></h1>
+Je hebt toegang tot de volgende userlevels: <?php 
+$has = false;
+
+foreach ($levels as $lvl => $naam)
+{
+	if (allow($lvl, false))
+	{
+		if ($has)
+		{
+			echo ", ";
+		}
+		else
+		{
+			$has = true;
+		}
+		echo $naam;
+	}
+}
+?>
+    
 <table border="0" width="100%">
 <tr>
 	<td width="50%" valign="top">
