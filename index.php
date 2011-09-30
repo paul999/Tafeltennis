@@ -146,6 +146,14 @@ if (allow(array(speler, coach, beheer, admin)))
 			$sql = 'SELECT * FROM wedstrijden WHERE team = ' . (int)$_SESSION['team'];
 			$result = mysql_query($sql) or sqlE();
 			
+			$wedstrijden = array();
+			$ids = array();
+			$uitslagen = array();
+			$spelers = array();
+			$sp = array();
+			$speler = array();
+			$vast = array();
+			$coach = array();			
 			
 			if (!mysql_num_rows($result))
 			{
@@ -153,15 +161,6 @@ if (allow(array(speler, coach, beheer, admin)))
 			}
 			else
 			{
-				$wedstrijden = array();
-				$ids = array();
-				$uitslagen = array();
-				$spelers = array();
-				$sp = array();
-				$speler = array();
-				$vast = array();
-				$coach = array();
-				
 				while ($row = mysql_fetch_assoc($result))
 				{
 					$ids[] = $row['id']; // Selecteer uitslagen zo :)
@@ -196,62 +195,59 @@ if (allow(array(speler, coach, beheer, admin)))
 						}
 					}
 				}
+			}
+			$sql = 'SELECT * FROM teamuser WHERE team = ' . $team['id'];
+			$result = mysql_query($sql) or sqlE();
+			
+			while ($row = mysql_fetch_assoc($result))
+			{
+				$sp[] = $row['spelerid'];
 				
-				$sql = 'SELECT * FROM teamuser WHERE team = ' . $team['id'];
+				if ($row['functie'] == COACH)
+				{
+					$coach[] = $row;
+				}
+				else
+				{
+					$vast[] = $row;
+				}
+			}
+			
+			if (sizoef($vast) < $team['minspelers'])
+			{
+				echo '<strong>LETOP:</strong><p>Aantal spelers in dit team is lager als het minimum!</p>';
+			}	
+			if (sizeof($coach) == 0)
+			{
+				echo "<p>Er is nog geen coach voor dit team bepaald.</p>";
+			}
+			
+			if (sizeof($sp))
+			{
+				// Selecteer naamgegevens ed van spelers.
+				$sql = 'SELECT * FROM users WHERE id IN (' . implode($sp, ', ') . ')';
+				
 				$result = mysql_query($sql) or sqlE();
 				
-				while ($row = mysql_fetch_assoc($result))
+				if (mysql_num_rows($result))
 				{
-					$sp[] = $row['spelerid'];
-					
-					if ($row['functie'] == COACH)
+					while ($row = mysql_fetch_assoc($result))
 					{
-						$coach[] = $row;
-					}
-					else
-					{
-						$vast[] = $row;
+						$speler[$row['id']] = $row;
 					}
 				}
-				
-				if (sizoef($vast) < $team['minspelers'])
-				{
-					echo '<strong>LETOP:</strong><p>Aantal spelers in dit team is lager als het minimum!</p>';
-				}	
-				if (sizeof($coach) == 0)
-				{
-					echo "<p>Er is nog geen coach voor dit team bepaald.</p>";
-				}
-				
-				if (sizeof($sp))
-				{
-					// Selecteer naamgegevens ed van spelers.
-					$sql = 'SELECT * FROM users WHERE id IN (' . implode($sp, ', ') . ')';
-					
-					$result = mysql_query($sql) or sqlE();
-					
-					if (mysql_num_rows($result))
-					{
-						while ($row = mysql_fetch_assoc($result))
-						{
-							$speler[$row['id']] = $row;
-						}
-					}
-				}
-				// Zo, alle data is daar. Nu overzichtjes maken.
-				
-				foreach ($coach as $c)
-				{
-					if (!isset($speler[$c['user']]))
-					{
-						echo "<p>Ik heb een coach gevonden, maar geen naam :(</p>";
-						continue;
-					}
-					echo "<strong>Coach<strong>: " . $speler[$c['user']]['username'] . "<br />"; 
-				}
-				
-				
 			}
+			// Zo, alle data is daar. Nu overzichtjes maken.
+			
+			foreach ($coach as $c)
+			{
+				if (!isset($speler[$c['user']]))
+				{
+					echo "<p>Ik heb een coach gevonden, maar geen naam :(</p>";
+					continue;
+				}
+				echo "<strong>Coach<strong>: " . $speler[$c['user']]['username'] . "<br />"; 
+			}			
 		}
 	}
 	echo "</div>";// End tab div.
