@@ -26,7 +26,7 @@ function allow($level, $die = true, $override = false)
 	}
 	else
 	{
-		if ($overide !== false)
+		if ($override !== false)
 		{
 			$allow = (($overide & $level)) ? true : false;
 		}
