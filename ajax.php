@@ -73,7 +73,7 @@ switch ($_REQUEST['mode'])
 	break;
 	
 	case 'addgebruiker':
-		$naam = mysql_real_escape_string($_POST['naam'];
+		$naam = mysql_real_escape_string($_POST['naam']);
 		$recht = (int)$_POST['recht'];
 		$ww = md5($_POST['wachtwoord']);
 		$email = mysql_real_escape_string($_POST['email']);
