@@ -71,6 +71,34 @@ switch ($_REQUEST['mode'])
 		}
 		exit;
 	break;
+	
+	case 'addgebruiker':
+		$naam = mysql_real_escape_string($_POST['naam'];
+		$recht = (int)$_POST['recht'];
+		$ww = md5($_POST['wachtwoord']);
+		$email = mysql_real_escape_string($_POST['email']);
+		
+		if (empty($naam))
+		{
+			error("Naam is leeg");
+		}
+		if (empty($_POST['wachtwoord']))
+		{
+			error("Wachtwoord is leeg");
+		}
+		if (empty($email))
+		{
+			error("Email is leeg");
+		}
+		
+		$sql = "INSERT INTO users SET username = '$naam', access = $nummer, password = '$password', email = '$email'";
+		mysql_query($sql) or err(mysql_error());
+		
+		$xml = sprintf('<text>Gebruiker toegevoegd</text>', $xml);
+		exit;	
+	
+		exit;
+	break;
 		
 }
 	

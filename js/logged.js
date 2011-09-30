@@ -89,6 +89,7 @@ $(document).ready(function(){
 				}
 			}
 			
+			console.log("Nieuwe rechten: " + recht);
 		
 			$.ajax({
 				url: 'ajax.php',
