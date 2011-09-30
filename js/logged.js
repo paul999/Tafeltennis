@@ -79,9 +79,9 @@ $(document).ready(function(){
 				}
 				else
 				{
-					var id = '#' + data[i];
+					var id = '#r' + data[i];
 					console.log("Check for id: " + id);
-					if ($(id).is(":checked"))
+					if ($(id).is(':checked'))
 					{
 						console.log("Checked");
 						recht += data[i];
