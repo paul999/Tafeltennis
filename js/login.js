@@ -26,8 +26,8 @@ $(document).ready(function(){
 			}
 			else
 			{
-				https://github.com/phpbb/umil/pull/16		$("#formid").html($("text", xml).text());
-				location.href = location.href;
+				$("#formid").html($("text", xml).text());
+				location.href = location.href
 			}
 		});
 	});

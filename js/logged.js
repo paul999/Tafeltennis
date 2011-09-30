@@ -19,13 +19,17 @@ $(document).ready(function(){
 					$('#loadingalert').fadeOut(100);
 					$('#darkenwrapper').fadeOut(100);  		 
 				},
+				error: function()
+				{
+					alert("Error?");
+				}
 				success: function(xml)
 				{
 					alert(xml);
 					$('#sendteamtoevoegen').attr({'disabled' : false, 'value' : 'Opslaan' });
 					$('#teamToevoegenOk').fadeIn(500);
 				
-					setTimeout(";$('#teamToevoegenOk').fadeOut(500);", 1000);
+					setTimeout(";$('#teamToevoegenOk').fadeOut(500);location.href = location.href", 1000);
 				}
 			});					
 		
