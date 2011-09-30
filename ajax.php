@@ -2,8 +2,9 @@
 require('config.php');
 error_reporting(0);
 $average = $count = null;
-	$xml = "<ajax>%s</ajax>";
-	header('Content-type: text/xml'); 
+$xml = "<ajax>%s</ajax>";
+header('Content-type: text/xml'); 
+register_shutdown_function ('printer');
 	
 	switch ($_REQUEST['mode'])
 	{
@@ -11,7 +12,20 @@ $average = $count = null;
 			$naam = 'team';
 			$nummer = (int)$_POST['team'];
 			$poule = mysql_real_escape_string($_POST['poule']);
-			$klass = mysql_real_escape_string($_POST['klasse']);
+			$klasse = mysql_real_escape_string($_POST['klasse']);
+			
+			if (empty($nummer))
+			{
+				error("Teamnummber is leeg");
+			}
+			if (empty($poule))
+			{
+				error("Poule is leeg");
+			}
+			if (empty($klasse))
+			{
+				error("Klasse is leeg");
+			}
 			
 			$sql = 'INSERT INTO ban SET ip = \'' . $ip . '\'';
 			mysql_query($sql) or err(mysql_error());
@@ -124,8 +138,14 @@ $average = $count = null;
 		
 		break;		
 	}
-	echo $xml;
 exit;
+
+function printer()
+{
+	global $xml;
+	echo $xml;
+	exit;
+}
 
 
 function xml($result)
@@ -148,10 +168,14 @@ function tc()
 {
 	`touch /tmp/upd_fire2`;
 }
+
+function error($str)
+{
+	$xml = sprintf($xml, "<error>1</error><text>$str</text>");
+	exit;
+}
 function err($str)
 {
-	global $xml;
-	
-	printf($xml, "<error>1</error><text>mySQL error, neem contact op met de webmaster. Error melding: \n$str</text>");
-	die;
+	error("mySQL error, neem contact op met de webmaster. Error melding: \n$str");
+	exit;
 }
