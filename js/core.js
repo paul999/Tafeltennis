@@ -1,10 +1,4 @@
 var ENTER = 13, ESC = 27;
-define('USER', 1, true);
-define('ADMIN', 2, true);
-define('COACH', 4, true);
-define('BEHEER', 8, true);
-define('OUDER', 16, true);
-define('SPELER', 32, true);
 
 var USER = 1;
 var ADMIN = 2;
