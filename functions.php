@@ -39,9 +39,31 @@ function allow($level, $die = true, $override = false)
 	global $levels;
 	if ($die)
 	{
-		if ($allow)
+		if (!$allow)
 		{
-			displayError('Je hebt geen toegang tot deze functie. Voor deze functie is het toegangslevel ' . $levels[$level] . ' nodig.', 'Geen toegang');;
+			$rest = '';
+			if (is_array($level))
+			{
+				$i = 0;
+				foreach ($level as $lvl)
+				{
+					if ($i > 0)
+					{
+						$rest .= ' of'; 
+					}
+					$rest .= ' ' . $levels[$lvl];
+					$i++;
+				} 
+			}
+			else
+			{
+				$rest = ' ' . $levels[$level];
+			}
+			displayError('Je hebt geen toegang tot deze functie. Voor deze functie is het toegangslevel' . $rest . ' nodig.', 'Geen toegang');;
+		}
+		else
+		{
+			return true;
 		}
 	}
 	else
