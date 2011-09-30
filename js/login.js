@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$('.alert_close').one('click', function() {
+	$('.alert_close').click(function(e) {
 		$('#darkenwrapper').fadeOut(100);	
 		$('.phpbb_alert').fadeOut(100);
 	});
