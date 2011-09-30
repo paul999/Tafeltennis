@@ -1,4 +1,8 @@
 $(document).ready(function(){
+	div.find('.alert_close').one('click', function() {
+		$('#darkenwrapper').fadeOut(100);	
+	});
+
 	//Just some tabs :)
 	//When page loads...
 	$(".tab_content").hide(); //Hide all content

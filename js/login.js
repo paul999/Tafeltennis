@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	div.find('.alert_close').one('click', function() {
+	$('#darkenwrapper').fadeOut(100);	
+	});
 
 	// generate markup
 	$("#login").html("<div id='loginerr' class='error'></div><form id='formid'>Username: <input type='text' name='user' id='user' /><br />Password: <input type='password' name='ps' id='ps' /><br /><a href='#'>Login</a>");
