@@ -270,7 +270,7 @@ if (allow(array(admin, beheer), false))
 		<h1>Gebruiker toevoegen</h1>
 	
 		<form id="gebruikerToevoegenform">
-			<div id="gebruikerToevoegenOk" class="success">Team toegevoegd</div>
+			<div id="gebruikerToevoegenOk" class="success">Gebruiker toegevoegd</div>
 			<div id="gebruikerToevoegenErr" class="error"></div>
 			Naam: <input type="text" id="naam" /><br />
 			Wachtwoord: <input type="password" id="wachtwoord" /><br />
