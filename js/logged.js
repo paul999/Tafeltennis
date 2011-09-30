@@ -40,7 +40,7 @@ $(document).ready(function(){
 		
 	});
 	
-	function displayError(id, text);
+	function displayError(id, text)
 	{
 		$(id).html(text);    	
 		$(id).fadeIn(500);
