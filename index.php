@@ -140,7 +140,7 @@ if (allow(array(speler, coach, beheer, admin)))
 			$result = mysql_query($sql) or sqlE();
 			$team = mysql_fetch_assoc($result);
 		
-			echo "<h2>Wedstrijden voor team " . $team['team'] . "</h2>";
+			
 			// Hier competitie overzicht.
 			
 			$sql = 'SELECT * FROM wedstrijden WHERE team = ' . (int)$_SESSION['team'];
@@ -155,47 +155,41 @@ if (allow(array(speler, coach, beheer, admin)))
 			$vast = array();
 			$coach = array();			
 			
-			if (!mysql_num_rows($result))
+			while ($row = mysql_fetch_assoc($result))
 			{
-				echo "<p>Er zijn nog geen wedstrijden ingevuld voor team " . $team['team'] . "</p>";
+				$ids[] = $row['id']; // Selecteer uitslagen zo :)
+				$wedstrijden[] = $row;
 			}
-			else
+			
+			
+			if (sizeof($ids))
 			{
-				while ($row = mysql_fetch_assoc($result))
+				// Selecteer uitslagen voor deze wedstrijden.
+				$sql = 'SELECT * FROM uitslagen WHERE wedstrijd IN (' . implode($ids, ', ') . ')';
+				$result = mysql_query($sql) or sqlE();
+				
+				if (mysql_num_rows($result))
 				{
-					$ids[] = $row['id']; // Selecteer uitslagen zo :)
-					$wedstrijden[] = $row;
+					while ($row = mysql_fetch_assoc($result))
+					{
+						$uitslagen[$row['wedstrijd']] = $row;
+					}
 				}
 				
+				// Selecteer alle benodigde spelers enzo.
+				$sql = 'SELECTEER * FROM spelerwedstrijd WHERE wedstrijd IN (' . implode($ids, ', ') . ')';
+				$result = mysql_query($sql) or sqlE();
 				
-				if (sizeof($ids))
+				if (mysql_num_rows($result))
 				{
-					// Selecteer uitslagen voor deze wedstrijden.
-					$sql = 'SELECT * FROM uitslagen WHERE wedstrijd IN (' . implode($ids, ', ') . ')';
-					$result = mysql_query($sql) or sqlE();
-					
-					if (mysql_num_rows($result))
+					while ($row = mysql_fetch_assoc($result))
 					{
-						while ($row = mysql_fetch_assoc($result))
-						{
-							$uitslagen[$row['wedstrijd']] = $row;
-						}
-					}
-					
-					// Selecteer alle benodigde spelers enzo.
-					$sql = 'SELECTEER * FROM spelerwedstrijd WHERE wedstrijd IN (' . implode($ids, ', ') . ')';
-					$result = mysql_query($sql) or sqlE();
-					
-					if (mysql_num_rows($result))
-					{
-						while ($row = mysql_fetch_assoc($result))
-						{
-							$spelers[$row['wedstrijd']] = $row;
-							$sp[] = $row['spelerid'];
-						}
+						$spelers[$row['wedstrijd']] = $row;
+						$sp[] = $row['spelerid'];
 					}
 				}
 			}
+			
 			$sql = 'SELECT * FROM teamuser WHERE team = ' . $team['id'];
 			$result = mysql_query($sql) or sqlE();
 			
@@ -212,10 +206,11 @@ if (allow(array(speler, coach, beheer, admin)))
 					$vast[] = $row;
 				}
 			}
+			echo '<h2>Teamgegevens</h2>';
 			
 			if (sizeof($vast) < $team['minspelers'])
 			{
-				echo '<strong>LETOP:</strong><p>Aantal spelers in dit team is lager als het minimum!</p>';
+				echo '<p><strong>LETOP:</strong>Aantal spelers in dit team is lager als het minimum!</p>';
 			}	
 			if (sizeof($coach) == 0)
 			{
@@ -247,7 +242,30 @@ if (allow(array(speler, coach, beheer, admin)))
 					continue;
 				}
 				echo "<strong>Coach<strong>: " . $speler[$c['user']]['username'] . "<br />"; 
-			}			
+			}
+			
+			echo "<strong>Spelers:</strong><ul>";
+			foreach ($vast as $v)
+			{
+				if (!isset($speler[$c['user']]))
+				{
+					echo "<li>Ik heb een speler gevonden, maar geen naam :(</li>";
+					continue;
+				}
+				echo "<li>" . $speler[$c['user']]['username'] . "</li>"; 			
+			}
+			echo "</ul>";
+			
+			echo "<h2>Wedstrijden voor team " . $team['team'] . "</h2>";
+			
+			if (sizeof($wedstrijden) == 0)
+			{
+				echo "<p>Er zijn nog geen wedstrijden ingevuld voor team " . $team['team'] . "</p>";						
+			}
+			else
+			{
+			
+			}
 		}
 	}
 	echo "</div>";// End tab div.
