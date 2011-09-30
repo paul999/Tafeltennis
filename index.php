@@ -186,56 +186,10 @@ if (allow(array(speler, coach)))
 		}
 	}
 }
-?>
-    
-<table border="0" width="100%">
-<tr>
-	<td width="50%" valign="top">
-		<h1>Servers</h1>
-		<img src="ajax-loader.gif" id="wait1" />
-		
-		<ul id="servers">
-		</ul>
-		
-		<form id="sendServer">
-		<div id='server_success' class='success'>Server opgeslagen</div>
-		IP: <input type="text" id="addServerIp" /><br />
-		Server: <input type="text" id="addServer" /><br />
-		<input type="submit" id="send_message_server" value="Add server" />
-		</form>		
-		
-	</td>
-	<td valign="top">
-		<h1>Services</h1>
-		<img src="ajax-loader.gif" id="wait2" />
-		<ul id="services">
-		</ul>
-		
-		<form id="sendService">
-		<div id='service_success' class='success'>Service opgeslagen</div>
-		Port: <input type="text" id="addServicePort" /><br />
-		Service: <input type="text" id="addService" /><br />
-		<input type="submit" id="send_message_service" value="Add service" />
-		</form>			
-	</td>
-</tr>
-	<td valign="top">
-		<h1>Services op servers</h1>
-		<img src="ajax-loader.gif" id="wait3" />
-		
-		<ul id="servers2">
-		</ul>		
-	</td>
-	<td valign="top">
-		<h1>Access control</h1>
-		<img src="ajax-loader.gif" id="wait4" />
-		<ul id="servers3">
-		</ul>
-</tr>
-<?php
+
 if (allow(admin, false))
 {
-?>
+?><!--
 <tr>
 	<td>
 		<h1>Banned</h1>
@@ -250,7 +204,7 @@ if (allow(admin, false))
 		<input type="submit" id="send_message_ban" value="Add ban" />
 		</form>
 	</td>
-</tr>
+</tr>-->
 <?php
 }
 
@@ -269,7 +223,6 @@ if (allow(array(admin, beheer), false))
 	<?php
 }
 ?>
-</table>
 <div id="darkenwrapper">
 	<div id="darken">&nbsp;</div>
 	<div class="jalert" id="loadingalert"><h3>Laden...</h3><p>Een moment geduld...</p></div>
