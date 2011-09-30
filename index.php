@@ -278,7 +278,7 @@ if (allow(array(admin, beheer), false))
 			Rechten:<br />
 			<?php
 			foreach ($levels as $recht => $naam)
-			{
+			{			
 				echo "<input type='checkbox' value='$recht' id='r$recht'/><label for='r$recht'>$naam</label><br />";
 			}
 			?>

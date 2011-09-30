@@ -58,6 +58,66 @@ $(document).ready(function(){
 		
 	});
 	
+	$('#gebruikertoevoegen').click(function(e){
+			//stop the form from being submitted
+			e.preventDefault();
+			
+
+			$('#gebruikertoevoegen').attr({'disabled' : 'true', 'value' : 'Sending...' });	
+		
+			var naam = $("#naam").attr("value");
+			var ww = $("#wachtwoord").attr("value");
+			var email = $("#email").attr("value");
+			
+			var recht = 0;
+			
+			for (i = 0; i < data.length; i++)
+			{
+				if (data[i] == 1)
+				{
+					recht += 1;
+				}
+				else
+				{
+					var id = '#' + data[i];
+					if ($(id).is(":checked"))
+					{
+						recht += data[i];
+					}
+				}
+			}
+			
+		
+			$.ajax({
+				url: 'ajax.php',
+				data: {mode: 'addgebruiker', 'recht': recht, 'naam': naam, 'wachtwoord': ww, 'email': email},
+				type: 'POST',
+				beforeSend: function() { $.loading_alert(); },
+				complete: function() { 
+					$('#loadingalert').fadeOut(100);
+					$('#darkenwrapper').fadeOut(100); 
+					$('#gebruikertoevoegen').attr({'disabled' : false, 'value' : 'Opslaan' }); 		 
+				},
+				error: function()
+				{
+					displayError('#gebruikerToevoegenErr', "Er was een fout tijdens het versturen van de HTTP request?");
+				},
+				success: function(xml)
+				{
+					if ($("error",xml).text() == "1")
+					{
+						displayError('#gebruikerToevoegenErr', $("text", xml).text());
+					}
+					else
+					{
+						$('#gebruikerToevoegenOk').fadeIn(500);				
+						setTimeout(";$('#gebruikerToevoegenOk').fadeOut(500);location.href = location.href", 5000);
+					}
+				}
+			});					
+		
+	});	
+	
 	$('#selectteam').click(function(e){
 			//stop the form from being submitted
 			e.preventDefault();

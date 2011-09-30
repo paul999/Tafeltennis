@@ -1,4 +1,20 @@
 var ENTER = 13, ESC = 27;
+define('USER', 1, true);
+define('ADMIN', 2, true);
+define('COACH', 4, true);
+define('BEHEER', 8, true);
+define('OUDER', 16, true);
+define('SPELER', 32, true);
+
+var USER = 1;
+var ADMIN = 2;
+var COACH = 4;
+var BEHEER = 8;
+var OUDER = 16;
+var SPELER = 32;
+
+var data = new Array(1, 2, 4, 8, 16, 32);
+
 $.loading_alert = function() {
 	if ($('#darkenwrapper').is(':visible'))
 	{
