@@ -104,7 +104,7 @@ if (allow(array(speler, coach)))
 				<?php
 				for ($i = 0; $i < sizeof($teams); $i++)
 				{
-					echo "<option value='{$teams['id']}'>{$teams['team']}</option>";
+					echo "<option value='{$teams[$i]['id']}'>Team {$teams[$i]['team']}</option>";
 				}
 				?>
 			</select>
