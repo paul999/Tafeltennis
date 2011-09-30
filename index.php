@@ -117,7 +117,7 @@ if (allow(array(speler, coach, beheer, admin)))
 		{
 			?>
 			<div id="teamselect">
-			<h2>Selecteer team</h2>
+			<h3>Selecteer team</h3>
 			<p>Selecteer het team waarvan je het competitie overzicht wilt zien:</p>
 			<form id="selectTeam">
 			<select id="teams">
