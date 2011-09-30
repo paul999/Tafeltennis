@@ -77,13 +77,13 @@ foreach ($levels as $lvl => $naam)
 ?>
 <ul class="tabs">
 	<?php
-	if (allow(array(speler, coach, beheer, admin)))
+	if (allow(array(speler, coach, beheer, admin), false))
 	{
 	?>
     <li><a href="#competitie">Competitie overzicht</a></li>
     <?php
     }
-    if (allow(array(admin, beheer)))
+    if (allow(array(admin, beheer), false))
     {
     ?>
     <li><a href="#gebruikertoevoegen">Gebruiker toevoegen</a></li>
