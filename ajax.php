@@ -27,7 +27,7 @@ register_shutdown_function ('printer');
 				error("Klasse is leeg");
 			}
 			
-			$sql = "INSERT INTO teams SET naam = '$naam', team = $nummer, minspelers = 3, poule = '$poule', klass = '$klasse'";
+			$sql = "INSERT INTO teams SET naam = '$naam', team = $nummer, minspelers = 3, poule = '$poule', klasse = '$klasse'";
 			mysql_query($sql) or err(mysql_error());
 			
 			$xml = sprintf('<text>Team toegevoegd</text>', $xml);
