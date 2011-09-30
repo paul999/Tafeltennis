@@ -82,6 +82,7 @@ function displayError($msg, $tit = 'Error')
 	?>
 	<h1><?php echo $tit; ?></h1>
 	<p><?php echo $msg; ?></p>
+	<?php debug_print_backtrace(); ?>
 	</body></html>
 	<?php
 	exit;
