@@ -78,7 +78,7 @@ foreach ($levels as $lvl => $naam)
 <ul class="tabs">
     <li><a href="#competitie">Competitie overzicht</a></li>
     <?php
-    if (allow(array(admin, beheer))
+    if (allow(array(admin, beheer)))
     {
     ?>
     <li><a href="#gebruiker">Gebruiker toevoegen</a></li>
