@@ -58,7 +58,7 @@ $(document).ready(function(){
 		
 	});
 	
-	$('#gebruikertoevoegen').click(function(e){
+	$('#sendgebruikertoevoegen').click(function(e){
 			//stop the form from being submitted
 			e.preventDefault();
 			
