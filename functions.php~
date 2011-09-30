@@ -95,8 +95,8 @@ function sqlE()
 function teamAllow($uid = false, $permissie = false)
 {
 	global $data;
-
-	if ($permissie !== false && $uid === false)
+	
+	if ($permissie !== true && $uid === false)
 	{
 		return false;
 	}
@@ -118,7 +118,7 @@ function teamAllow($uid = false, $permissie = false)
 	{
 		$sql = 'SELECT team, id FROM teams t LEFT JOIN teamuser u ON t.team = u.team WHERE u.user = '. (int)$uid;
 	}
-
+	
 	$result = mysql_query($sql) or sqlE();
 	
 	if (!mysql_num_rows($result))
