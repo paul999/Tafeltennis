@@ -160,6 +160,7 @@ if (allow(array(speler, coach, beheer, admin)))
 				$sp = array();
 				$speler = array();
 				$vast = array();
+				$coach = array();
 				
 				while ($row = mysql_fetch_assoc($result))
 				{
@@ -196,14 +197,31 @@ if (allow(array(speler, coach, beheer, admin)))
 					}
 				}
 				
-				$sql = 'SELECT * FROM spelers WHERE team = ' . $team['id'];
+				$sql = 'SELECT * FROM teamuser WHERE team = ' . $team['id'];
 				$result = mysql_query($sql) or sqlE();
 				
 				while ($row = mysql_fetch_assoc($result))
 				{
 					$sp[] = $row['spelerid'];
+					
+					if ($row['functie'] == COACH)
+					{
+						$coach[] = $row;
+					}
+					else
+					{
+						$vast[] = $row;
+					}
 				}
 				
+				if (sizoef($vast) < $team['minspelers'])
+				{
+					echo '<strong>LETOP:</strong><p>Aantal spelers in dit team is lager als het minimum!</p>';
+				}	
+				if (sizeof($coach) == 0)
+				{
+					echo "<p>Er is nog geen coach voor dit team bepaald.</p>";
+				}
 				
 				if (sizeof($sp))
 				{
@@ -221,6 +239,16 @@ if (allow(array(speler, coach, beheer, admin)))
 					}
 				}
 				// Zo, alle data is daar. Nu overzichtjes maken.
+				
+				foreach ($coach as $c)
+				{
+					if (!isset($speler[$c['user']]))
+					{
+						echo "<p>Ik heb een coach gevonden, maar geen naam :(</p>";
+						continue;
+					}
+					echo "<strong>Coach<strong>: " . $speler[$c['user']]['username'] . "<br />"; 
+				}
 				
 				
 			}
