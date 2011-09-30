@@ -17,16 +17,22 @@ $(document).ready(function(){
 				beforeSend: function() { $.loading_alert(); },
 				complete: function() { 
 					$('#loadingalert').fadeOut(100);
-					$('#darkenwrapper').fadeOut(100);  		 
+					$('#darkenwrapper').fadeOut(100); 
+					$('#sendteamtoevoegen').attr({'disabled' : false, 'value' : 'Opslaan' }); 		 
 				},
 				error: function()
 				{
-					alert("Error?");
-				}
+					$("#teamToevoegenErr").html("Er was een fout tijdens het versturen van de HTTP request?");    	
+					$('#teamToevoegenErr').fadeIn(500);
+
+					setTimeout(";$('#teamToevoegenErr').fadeOut(500);", 5000);
+					
+					console.log("Foutmelding bij HTTP request, ajax.php niet bereikbaar?");
+				},
 				success: function(xml)
 				{
 					alert(xml);
-					$('#sendteamtoevoegen').attr({'disabled' : false, 'value' : 'Opslaan' });
+					
 					$('#teamToevoegenOk').fadeIn(500);
 				
 					setTimeout(";$('#teamToevoegenOk').fadeOut(500);location.href = location.href", 1000);
