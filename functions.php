@@ -110,12 +110,12 @@ function teamAllow($uid = false, $permissie = false)
 		$uid = $data['id'];
 	}
 	
-/*	if (allow(array(beheer, admin), false, $permissie))
+	if (allow(array(beheer, admin), false, $permissie))
 	{
 		$sql = 'SELECT team FROM teams';
 	}
 	else
-	*/{
+	{
 		$sql = 'SELECT t.team, t.id FROM teams t LEFT JOIN teamuser u ON t.team = u.team WHERE u.user = '. (int)$uid;
 	}
 
