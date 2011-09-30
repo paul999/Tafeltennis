@@ -27,12 +27,10 @@ register_shutdown_function ('printer');
 				error("Klasse is leeg");
 			}
 			
-			$sql = 'INSERT INTO ban SET ip = \'' . $ip . '\'';
+			$sql = "INSERT INTO teams SET naam = '$naam', team = $nummer, minspelers = 3, poule = '$poule', klass = '$klasse'";
 			mysql_query($sql) or err(mysql_error());
 			
-			tc();
-			
-			$xml = sprintf('<text>banned</text>', $xml);
+			$xml = sprintf('<text>Team toegevoegd</text>', $xml);
 		break;
 
 		case 'addserver':
