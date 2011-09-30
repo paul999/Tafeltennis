@@ -76,8 +76,12 @@ foreach ($levels as $lvl => $naam)
 }
 ?>
 <ul class="tabs">
+	<?php
+	if (allow(array(speler, coach, beheer, admin)))
+	?>
     <li><a href="#competitie">Competitie overzicht</a></li>
     <?php
+    }
     if (allow(array(admin, beheer)))
     {
     ?>
@@ -258,6 +262,27 @@ if (allow(array(admin, beheer), false))
 			Klasse: <input type="text" id="teamklasse" /><br />
 			Poule: <input type="text" id="teampoule" /></br />
 			<input type="submit" id="sendteamtoevoegen" value="Opslaan"/>
+		</form>
+	</div>
+
+	<div id="gebruikertoevoegen" class="tab_content">
+		<h1>Gebruiker toevoegen</h1>
+	
+		<form id="gebruikerToevoegenform">
+			<div id="gebruikerToevoegenOk" class="success">Team toegevoegd</div>
+			<div id="gebruikerToevoegenErr" class="error"></div>
+			Naam: <input type="text" id="naam" /><br />
+			Wachtwoord: <input type="password" id="wachtwoord" /><br />
+			Email: <input type="text" id="email" /></br />
+			Rechten:<br />
+			<?php
+			foreach ($levels as $recht => $naam)
+			{
+				echo "<input type='checkbox' value='$recht' id='r$recht'/><label for='r$recht'>$naam</label><br />";
+			}
+			?>
+			
+			<input type="submit" id="sendgebruikertoevoegen" value="Opslaan"/>
 		</form>
 	</div>
 	<?php
