@@ -213,7 +213,7 @@ if (allow(array(speler, coach, beheer, admin)))
 				}
 			}
 			
-			if (sizoef($vast) < $team['minspelers'])
+			if (sizeof($vast) < $team['minspelers'])
 			{
 				echo '<strong>LETOP:</strong><p>Aantal spelers in dit team is lager als het minimum!</p>';
 			}	
