@@ -5,8 +5,8 @@ require('config.php');
 <html dir="ltr" lang="en-gb">
 <head>
 <meta charset="utf-8">
-  <style type="text/css" src="css/main.css"></style>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+	<link href="css/main.css" rel="stylesheet" type="text/css" media="screen, projection" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 	<script src="js/core.js" type="text/javascript"></script>
 	<?php
 		if (logged())
@@ -45,8 +45,8 @@ require('config.php');
 		<div id="phpbb_confirm" class="phpbb_alert">
 			<a href="#"><img src="images/alert_close.png" class="alert_close" /></a>
 			<p></p>
-			<input type="button" class="button1" value="{L_YES}" />&nbsp;
-			<input type="button" class="button2" value="{L_NO}" />
+			<input type="button" class="button1" value="Ja" />&nbsp;
+			<input type="button" class="button2" value="Nee" />
 		</div>		 
     	</body>
     	</html>
@@ -266,8 +266,8 @@ if (allow(admin, false))
 	<div id="phpbb_confirm" class="phpbb_alert">
 		<a href="#"><img src="images/alert_close.png" class="alert_close" /></a>
 		<p></p>
-		<input type="button" class="button1" value="{L_YES}" />&nbsp;
-		<input type="button" class="button2" value="{L_NO}" />
+		<input type="button" class="button1" value="Ja" />&nbsp;
+		<input type="button" class="button2" value="Nee" />
 	</div>
   </body>
 </html>
