@@ -116,6 +116,7 @@ if (allow(array(speler, coach, beheer, admin)))
 		if (sizeof($teams) > 1)
 		{
 			?>
+			<div id="teamselect">
 			<h2>Selecteer team</h2>
 			<p>Selecteer het team waarvan je het competitie overzicht wilt zien:</p>
 			<form id="selectTeam">
@@ -130,6 +131,7 @@ if (allow(array(speler, coach, beheer, admin)))
 			</select>
 			<input type="submit" id="selectteam" value="Selecteer"/>
 			</form>
+			</div>
 			<?php
 		}
 		if (isset($_SESSION['team']))

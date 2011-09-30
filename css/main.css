@@ -130,3 +130,13 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that th
 	padding: 20px;
 	font-size: 1.2em;
 }
+/** Team select box, rechts bovenaan **/
+#teamselect
+{
+	border: 1px solid #999;
+	position:absolute;
+	right:1px;
+	top: 1px;
+	width: 25%;
+	height: 75px;
+}
