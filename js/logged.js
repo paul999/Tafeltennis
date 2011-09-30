@@ -1,4 +1,37 @@
 $(document).ready(function(){
+	$('#sendteamtoevoegen').click(function(e){
+			//stop the form from being submitted
+			e.preventDefault();
+			
+
+			$('#sendteamtoevoegen').attr({'disabled' : 'true', 'value' : 'Sending...' });	
+		
+			var team = $("#teamnummer").attr("value");
+			var poule = $("#teampoule").attr("value");
+			var klasse = $("#teamklasse").attr("value");
+		
+			$.ajax({
+				url: 'ajax.php',
+				data: {mode: 'addteam', 'team': team, 'poule': poule, 'klasse': klasse},
+				type: 'POST',
+				beforeSend: function() { $.loading_alert(); },
+				complete: function() { 
+					$('#loadingalert').fadeOut(100);
+					$('#darkenwrapper').fadeOut(100);  		 
+				},
+				success: function(xml)
+				{
+					alert(xml);
+					$('#sendteamtoevoegen').attr({'disabled' : false, 'value' : 'Opslaan' });
+					$('#teamToevoegenOk').fadeIn(500);
+				
+					setTimeout(";$('#teamToevoegenOk').fadeOut(500);", 1000);
+				}
+			});					
+		
+	});
+
+/** Oude zooi: **/
 
 			function selectBan()
 			{
@@ -144,32 +177,7 @@ $(document).ready(function(){
 				  });			
 			}
 			
-			$('#send_message_ban').click(function(e){
-					//stop the form from being submitted
-					e.preventDefault();
-		
-					$('#send_message_ban').attr({'disabled' : 'true', 'value' : 'Sending...' });	
-					
-					var ip = $("#addBanIp").attr("value");
-					
-					$.ajax({
-						url: 'ajax.php',
-						data: {mode: 'addban', 'ip': ip},
-						type: 'POST',
-						beforeSend: function() { $('#wait5').show(); },
-						complete: function() { $('#wait5').hide(); },
-						success: function()
-						{
-							selectBan();
-							
-							$('#send_message_ban').attr({'disabled' : false, 'value' : 'Add ban' });
-							$('#ban_success').fadeIn(500);
-							
-							setTimeout(";$('#ban_success').fadeOut(500);", 1000);
-						}
-					});					
-					
-			});
+
 			
 			$('#send_message_server').click(function(e){
 					//stop the form from being submitted

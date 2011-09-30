@@ -253,6 +253,21 @@ if (allow(admin, false))
 </tr>
 <?php
 }
+
+if (allow(array(admin, beheer), false))
+{
+	?>
+	<h1>Team toevoegen</h1>
+	
+	<form id="teamToevoegen">
+	<div id="teamToevoegenOk" class="success">Team toegevoegd</div><div id="teamToevoegenErr" class="error"></div>
+	Teamnummer: <input type="text" id="teamnummer" /><br />
+	Klasse: <input type="text" id="teamklasse" /><br />
+	Poule: <input type="text" id="teampoule" /></br />
+	<input type="submit" id="sendteamtoevoegen" value="Opslaan"/>
+	</form>
+	<?php
+}
 ?>
 </table>
 <div id="darkenwrapper">

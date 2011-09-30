@@ -10,7 +10,7 @@ $average = $count = null;
 			$naam = 'team';
 			$nummer = (int)$_POST['team'];
 			$poule = mysql_real_escape_string($_POST['poule']);
-			$
+			$klass = mysql_real_escape_string($_POST['klasse']);
 			
 			$sql = 'INSERT INTO ban SET ip = \'' . $ip . '\'';
 			mysql_query($sql) or err(mysql_error());
