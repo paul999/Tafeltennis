@@ -75,10 +75,18 @@ foreach ($levels as $lvl => $naam)
 	}
 }
 ?>
-
+<ul class="tabs">
+    <li><a href="#competitie">Competitie overzicht</a></li>
+    <li><a href="#gebruiker">Gebruiker toevoegen</a></li>
+    <li><a href="#teamtoevoege">Teams toevoegen</a></li>
+    <li><a href="#tab2">Wijzig gegevens</a></li>
+</ul>
+<div class="tab_container">
 <?php
-if (allow(array(speler, coach)))
+if (allow(array(speler, coach, beheer, admin)))
 {
+	?><div id="competitie" class="tab_content"><?php
+	
 	echo '<h1>Competitie overzicht</h1>';
 	$teams = teamAllow();
 	
@@ -206,6 +214,7 @@ if (allow(array(speler, coach)))
 			}
 		}
 	}
+	echo "</div>";// End tab div.
 }
 
 if (allow(admin, false))
@@ -232,18 +241,22 @@ if (allow(admin, false))
 if (allow(array(admin, beheer), false))
 {
 	?>
-	<h1>Team toevoegen</h1>
+	<div id="teamtoevoegen" class="tab_content">
+		<h1>Team toevoegen</h1>
 	
-	<form id="teamToevoegen">
-	<div id="teamToevoegenOk" class="success">Team toegevoegd</div><div id="teamToevoegenErr" class="error"></div>
-	Teamnummer: <input type="text" id="teamnummer" /><br />
-	Klasse: <input type="text" id="teamklasse" /><br />
-	Poule: <input type="text" id="teampoule" /></br />
-	<input type="submit" id="sendteamtoevoegen" value="Opslaan"/>
-	</form>
+		<form id="teamToevoegenform">
+			<div id="teamToevoegenOk" class="success">Team toegevoegd</div>
+			<div id="teamToevoegenErr" class="error"></div>
+			Teamnummer: <input type="text" id="teamnummer" /><br />
+			Klasse: <input type="text" id="teamklasse" /><br />
+			Poule: <input type="text" id="teampoule" /></br />
+			<input type="submit" id="sendteamtoevoegen" value="Opslaan"/>
+		</form>
+	</div>
 	<?php
 }
 ?>
+</div>
 <div id="darkenwrapper">
 	<div id="darken">&nbsp;</div>
 	<div class="jalert" id="loadingalert"><h3>Laden...</h3><p>Een moment geduld...</p></div>
