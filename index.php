@@ -78,6 +78,7 @@ foreach ($levels as $lvl => $naam)
 <ul class="tabs">
 	<?php
 	if (allow(array(speler, coach, beheer, admin)))
+	{
 	?>
     <li><a href="#competitie">Competitie overzicht</a></li>
     <?php
