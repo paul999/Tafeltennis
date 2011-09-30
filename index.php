@@ -114,14 +114,22 @@ if (allow(array(speler, coach)))
 		}
 		if (isset($_SESSION['team']))
 		{
+		
+			// Selecteer team data.
+			$sql = 'SELECT * FROM teams WHERE id = '  . (int)$_SESSION['team'];
+			$result = mysql_query($sql) or sqlE();
+			$team = mysql_fetch_assoc($result);
+		
+			echo "<h2>Wedstrijden voor team " . $team['team'] . "</h2>";
 			// Hier competitie overzicht.
 			
 			$sql = 'SELECT * FROM wedstrijden WHERE team = ' . (int)$_SESSION['team'];
 			$result = mysql_query($sql) or sqlE();
 			
+			
 			if (!mysql_num_rows($result))
 			{
-				echo "<p>Er zijn nog geen wedstrijden ingevuld voor team " . intval($_SESSION['team']) . "</p>";
+				echo "<p>Er zijn nog geen wedstrijden ingevuld voor team " . $team['team'] . "</p>";
 			}
 			else
 			{
