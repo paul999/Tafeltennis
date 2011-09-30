@@ -234,7 +234,10 @@ if (allow(array(speler, coach, beheer, admin)))
 					}
 				}
 			}
-			echo '<a href="#" id="coachlink">Coach toevoegen</a> || <a href="#" id="spelerlink">Speler toevoegen</a>';
+			if (allow(array(beheer, admin), false))
+			{
+				echo '<p><a href="#" id="coachlink">Coach toevoegen</a> || <a href="#" id="spelerlink">Speler toevoegen</a></p>';
+			}
 			// Zo, alle data is daar. Nu overzichtjes maken.
 			
 			foreach ($coach as $c)
