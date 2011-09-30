@@ -139,6 +139,8 @@ if (allow(array(speler, coach)))
 				$spelers = array();
 				$sp = array();
 				$speler = array();
+				$vast = array();
+				
 				while ($row = mysql_fetch_assoc($result))
 				{
 					$ids[] = $row['id']; // Selecteer uitslagen zo :)
@@ -174,10 +176,19 @@ if (allow(array(speler, coach)))
 					}
 				}
 				
+				$sql = 'SELECT * FROM spelers WHERE team = ' . $team['id'];
+				$result = mysql_query($sql) or sqlE();
+				
+				while ($row = mysql_fetch_assoc($result))
+				{
+					$sp[] = $row['spelerid'];
+				}
+				
+				
 				if (sizeof($sp))
 				{
 					// Selecteer naamgegevens ed van spelers.
-					$sql = 'SELECT * FROM spelers WHERE id IN (' . implode($sp, ', ') . ')';
+					$sql = 'SELECT * FROM users WHERE id IN (' . implode($sp, ', ') . ')';
 					
 					$result = mysql_query($sql) or sqlE();
 					
