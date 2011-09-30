@@ -359,12 +359,12 @@ if (allow(array(admin, beheer), false))
 			
 			while ($row = mysql_fetch_assoc($result))
 			{
-				echo "<option value='{$row['id']}'>{$row['username']}</option";
+				echo "<option value='{$row['id']}'>{$row['username']}</option>";
 			}
 			?>
 		</select>
 		<input type="hidden" id="mode" value="" />
-		<input type="button" id="gebruikersbutton" />
+		<input type="button" id="gebruikersbutton" value="Opslaan" />
 	</div>
   </body>
 </html>

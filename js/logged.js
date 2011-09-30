@@ -178,6 +178,8 @@ $(document).ready(function(){
 			$('#darkenwrapper').fadeIn(100);
 		}	
 		
+		$('#mode').attr('value', 'addcoach');
+		
 				
 	});	
 
@@ -194,7 +196,7 @@ $(document).ready(function(){
 			$('#toevoegen').show();
 			$('#darkenwrapper').fadeIn(100);
 		}	
-		
+		$('#mode').attr('value', 'addspeler');
 				
 	});	
 	
