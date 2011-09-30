@@ -22,24 +22,32 @@ $(document).ready(function(){
 				},
 				error: function()
 				{
-					$("#teamToevoegenErr").html("Er was een fout tijdens het versturen van de HTTP request?");    	
-					$('#teamToevoegenErr').fadeIn(500);
-
-					setTimeout(";$('#teamToevoegenErr').fadeOut(500);", 5000);
-					
-					console.log("Foutmelding bij HTTP request, ajax.php niet bereikbaar?");
+					displayError('#teamToevoegenErr', "Er was een fout tijdens het versturen van de HTTP request?");
 				},
 				success: function(xml)
 				{
-					alert(xml);
-					
-					$('#teamToevoegenOk').fadeIn(500);
-				
-					setTimeout(";$('#teamToevoegenOk').fadeOut(500);location.href = location.href", 1000);
+					if ($("error",xml).text() == "1")
+					{
+						displayError('#teamToevoegenErr', $("text", xml).text());
+					}
+					else
+					{
+						$('#teamToevoegenOk').fadeIn(500);				
+						setTimeout(";$('#teamToevoegenOk').fadeOut(500);location.href = location.href", 5000);
+					}
 				}
 			});					
 		
 	});
+	
+	function displayError(id, text);
+	{
+		$(id).html(text);    	
+		$(id).fadeIn(500);
+
+		setTimeout(";$('" + id + "').fadeOut(500);", 5000);  
+		console.log(text);	
+	}
 
 /** Oude zooi: **/
 
