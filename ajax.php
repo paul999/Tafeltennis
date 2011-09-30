@@ -1,5 +1,6 @@
 <?php
 require('config.php');
+error_reporting(0);
 $average = $count = null;
 	$xml = "<ajax>%s</ajax>";
 	header('Content-type: text/xml'); 
