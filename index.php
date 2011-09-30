@@ -86,7 +86,7 @@ foreach ($levels as $lvl => $naam)
     if (allow(array(admin, beheer)))
     {
     ?>
-    <li><a href="#gebruiker">Gebruiker toevoegen</a></li>
+    <li><a href="#gebruikertoevoegen">Gebruiker toevoegen</a></li>
     <li><a href="#teamtoevoegen">Teams toevoegen</a></li>
     <?php
 	}
