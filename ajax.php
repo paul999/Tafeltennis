@@ -32,6 +32,12 @@ register_shutdown_function ('printer');
 			
 			$xml = sprintf('<text>Team toegevoegd</text>', $xml);
 		break;
+		
+		case 'selectteam':
+			$_SESSION['team'] = (int)$_POST['team'];
+			
+			$xml = sprintf('<text>Done</text>', $xml);
+		break;
 
 		case 'addserver':
 		     $ip = mysql_real_escape_string($_POST['ip']);

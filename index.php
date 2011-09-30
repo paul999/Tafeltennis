@@ -98,6 +98,7 @@ if (allow(array(speler, coach)))
 			?>
 			<h2>Selecteer team</h2>
 			<p>Selecteer het team waarvan je het competitie overzicht wilt zien:</p>
+			<form id="selectTeam">
 			<select id="teams">
 				<option>Selecteer team</option>
 				<?php
@@ -107,7 +108,8 @@ if (allow(array(speler, coach)))
 				}
 				?>
 			</select>
-			
+			<input type="submit" id="selectteam" value="Selecteer"/>
+			</form>
 			<?php
 		}
 		if (isset($_SESSION['team']))
@@ -119,7 +121,7 @@ if (allow(array(speler, coach)))
 			
 			if (!mysql_num_rows($result))
 			{
-				echo "<p>Er zijn nog geen wedstrijden ingevuld voor dit team</p>";
+				echo "<p>Er zijn nog geen wedstrijden ingevuld voor team " . intval($_SESSION['team']) . "</p>";
 			}
 			else
 			{

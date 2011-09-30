@@ -112,7 +112,7 @@ function teamAllow($uid = false, $permissie = false)
 	
 	if (allow(array(beheer, admin), false, $permissie))
 	{
-		$sql = 'SELECT team FROM teams';
+		$sql = 'SELECT team, id FROM teams';
 	}
 	else
 	{

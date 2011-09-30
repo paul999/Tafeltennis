@@ -40,6 +40,44 @@ $(document).ready(function(){
 		
 	});
 	
+	$('#selectteam').click(function(e){
+			//stop the form from being submitted
+			e.preventDefault();
+			
+
+			$('#selectteam').attr({'disabled' : 'true', 'value' : 'Sending...' });	
+		
+			var team = $("#teams").val();
+		
+			$.ajax({
+				url: 'ajax.php',
+				data: {mode: 'selectteam', 'team': team},
+				type: 'POST',
+				beforeSend: function() { $.loading_alert(); },
+				complete: function() { 
+					$('#loadingalert').fadeOut(100);
+					$('#darkenwrapper').fadeOut(100); 
+					$('#selectteam').attr({'disabled' : false, 'value' : 'Selecteer' }); 		 
+				},
+				error: function()
+				{
+					displayError('#selectteam', "Er was een fout tijdens het versturen van de HTTP request?");
+				},
+				success: function(xml)
+				{
+					if ($("error",xml).text() == "1")
+					{
+						displayError('#selectteam', $("text", xml).text());
+					}
+					else
+					{
+						location.href = location.href;
+					}
+				}
+			});					
+		
+	});	
+	
 	function displayError(id, text)
 	{
 		$(id).html(text);    	
