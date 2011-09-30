@@ -6,11 +6,8 @@ $average = $count = null;
 	
 	switch ($_REQUEST['mode'])
 	{
-		case 'addteam':
-			$naam = 'team';
-			$nummer = (int)$_POST['team'];
-			$poule = mysql_real_escape_string($_POST['poule']);
-			$
+		case 'addban':
+			$ip = mysql_real_escape_string($_POST['ip']);
 			
 			$sql = 'INSERT INTO ban SET ip = \'' . $ip . '\'';
 			mysql_query($sql) or err(mysql_error());
