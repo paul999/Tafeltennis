@@ -234,6 +234,7 @@ if (allow(array(speler, coach, beheer, admin)))
 					}
 				}
 			}
+			echo '<a href="#" id="coachlink">Coach toevoegen</a> || <a href="#" id="spelerlink">Speler toevoegen</a>';
 			// Zo, alle data is daar. Nu overzichtjes maken.
 			
 			foreach ($coach as $c)
@@ -347,6 +348,23 @@ if (allow(array(admin, beheer), false))
 		<p></p>
 		<input type="button" class="button1" value="Ja" />&nbsp;
 		<input type="button" class="button2" value="Nee" />
+	</div>
+	<div id="toevoegen" class="phpbb_alert">
+		<a href="#"><img src="images/alert_close.png" class="alert_close" /></a>
+		<p>Selecteer gebruiker om toe te voegen:</p>
+		<select id="gebruikerslijst">
+			<?php
+			$sql = "SELECT * FROM users ORDER BY username";
+			$result = mysql_query($sql) or sqlE();
+			
+			while ($row = mysql_fetch_assoc($result))
+			{
+				echo "<option value='{$row['id']}'>{$row['username']}</option";
+			}
+			?>
+		</select>
+		<input type="hidden" id="mode" value="" />
+		<input type="button" id="gebruikersbutton" />
 	</div>
   </body>
 </html>

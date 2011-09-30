@@ -157,6 +157,40 @@ $(document).ready(function(){
 				}
 			});					
 		
+	});		
+	
+	$('#coachlink').click(function(e){
+		//stop the form from being submitted
+		e.preventDefault();
+			
+		if ($('#darkenwrapper').is(':visible'))
+		{
+			$('#toevoegen').fadeIn(100);
+		}
+		else
+		{
+			$('#toevoegen').show();
+			$('#darkenwrapper').fadeIn(100);
+		}	
+		
+				
+	});	
+
+	$('#spelerlink').click(function(e){
+		//stop the form from being submitted
+		e.preventDefault();
+			
+		if ($('#darkenwrapper').is(':visible'))
+		{
+			$('#toevoegen').fadeIn(100);
+		}
+		else
+		{
+			$('#toevoegen').show();
+			$('#darkenwrapper').fadeIn(100);
+		}	
+		
+				
 	});	
 	
 	function displayError(id, text)
