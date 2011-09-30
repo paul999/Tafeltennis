@@ -91,7 +91,7 @@ switch ($_REQUEST['mode'])
 			error("Email is leeg");
 		}
 		
-		$sql = "INSERT INTO users SET username = '$naam', access = $nummer, password = '$password', email = '$email'";
+		$sql = "INSERT INTO users SET username = '$naam', access = $nummer, `password` = '$password', email = '$email'";
 		mysql_query($sql) or err(mysql_error());
 		
 		$xml = sprintf('<text>Gebruiker toegevoegd</text>', $xml);
