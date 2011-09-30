@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	$('.alert_close').one('click', function() {
 		$('#darkenwrapper').fadeOut(100);	
+		$('.phpbb_alert').fadeOut(100);
 	});
 
 	//Just some tabs :)
