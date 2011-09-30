@@ -128,7 +128,6 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that th
 }
 .tab_content {
 	padding: 20px;
-	font-size: 1.2em;
 }
 /** Team select box, rechts bovenaan **/
 #teamselect
@@ -139,4 +138,9 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that th
 	top: 1px;
 	width: 33%;
 	height: 100px;
+}
+
+h3
+{
+	margin:0;
 }
