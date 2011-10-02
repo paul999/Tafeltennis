@@ -45,13 +45,13 @@ $(document).ready(function(){
 				},
 				error: function()
 				{
-					displayError('#teamToevoegenErr', "Er was een fout tijdens het versturen van de HTTP request?");
+					displayMessage('#teamToevoegenErr', "Er was een fout tijdens het versturen van de HTTP request?");
 				},
 				success: function(xml)
 				{
 					if ($("error",xml).text() == "1")
 					{
-						displayError('#teamToevoegenErr', $("text", xml).text());
+						displayMessage('#teamToevoegenErr', $("text", xml).text());
 					}
 					else
 					{
@@ -108,13 +108,13 @@ $(document).ready(function(){
 				},
 				error: function()
 				{
-					displayError('#gebruikerToevoegenErr', "Er was een fout tijdens het versturen van de HTTP request?");
+					displayMessage('#gebruikerToevoegenErr', "Er was een fout tijdens het versturen van de HTTP request?");
 				},
 				success: function(xml)
 				{
 					if ($("error",xml).text() == "1")
 					{
-						displayError('#gebruikerToevoegenErr', $("text", xml).text());
+						displayMessage('#gebruikerToevoegenErr', $("text", xml).text());
 					}
 					else
 					{
@@ -127,42 +127,100 @@ $(document).ready(function(){
 	});	
 	
 	$('#selectteam').click(function(e){
-			//stop the form from being submitted
-			e.preventDefault();
-			
+		//stop the form from being submitted
+		e.preventDefault();
 
-			$('#selectteam').attr({'disabled' : 'true', 'value' : 'Sending...' });	
-		
-			var team = $("#teams").val();
-		
-			$.ajax({
-				url: 'ajax.php',
-				data: {mode: 'selectteam', 'team': team},
-				type: 'POST',
-				beforeSend: function() { $.loading_alert(); },
-				complete: function() { 
-					$('#loadingalert').fadeOut(100);
-					$('#darkenwrapper').fadeOut(100); 
-					$('#selectteam').attr({'disabled' : false, 'value' : 'Selecteer' }); 		 
-				},
-				error: function()
+		$('#selectteam').attr({'disabled' : 'true', 'value' : 'Sending...' });	
+	
+		var team = $("#teams").val();
+	
+		$.ajax({
+			url: 'ajax.php',
+			data: {mode: 'selectteam', 'team': team},
+			type: 'POST',
+			beforeSend: function() { $.loading_alert(); },
+			complete: function() { 
+				$('#loadingalert').fadeOut(100);
+				$('#darkenwrapper').fadeOut(100); 
+				$('#selectteam').attr({'disabled' : false, 'value' : 'Selecteer' }); 		 
+			},
+			error: function()
+			{
+				displayMessage('#selectteam', "Er was een fout tijdens het versturen van de HTTP request?");
+			},
+			success: function(xml)
+			{
+				if ($("error",xml).text() == "1")
 				{
-					displayError('#selectteam', "Er was een fout tijdens het versturen van de HTTP request?");
-				},
-				success: function(xml)
+					displayMessage('#selectteam', $("text", xml).text());
+				}
+				else
 				{
-					if ($("error",xml).text() == "1")
+					location.reload();
+				}
+			}
+		});					
+	});
+	
+	$('#gebruikersbutton').click(function(e){
+		//stop the form from being submitted
+		e.preventDefault();
+		
+		var mode = $('#mode').attr('value');
+			
+		if (mode == undefined || mode == null)
+		{
+			$('#darkenwrapper').fadeIn(100);
+			$('#toevoegen').fadeIn(100);
+			displayMessage('#toevoegenErr', "mode was null, kan geen request uitvoeren.");
+			return;
+		}
+		var user = $('#gebruikerslijst').val();
+			
+		$('#gebruikersbutton').attr({'disabled' : 'true', 'value' : 'Sending...' });	
+		
+		$.ajax({
+			url: 'ajax.php',
+			data: {'mode': mode, 'user': user},
+			type: 'POST',
+			beforeSend: function() { $.loading_alert(); },
+			complete: function() { 
+				$('#loadingalert').fadeOut(100);
+				$('#darkenwrapper').fadeOut(100); 
+				$('#gebruikersbutton').attr({'disabled' : false, 'value' : 'Opslaan' }); 		 
+			},
+			error: function()
+			{
+				displayMessage('#toevoegenErr', "Er was een fout tijdens het versturen van de HTTP request?");
+			},
+			success: function(xml)
+			{
+				if ($("error",xml).text() == "1")
+				{
+					displayMessage('#toevoegenErr', $("text", xml).text());
+				}
+				else
+				{
+					displayMessage("#toevoegenOk", $("text", xml).text());
+					
+					var user = $("#gebruikerslijst :selected").text();
+					var mode = $('#mode').attr('value');
+					var id;
+					
+					if (mode == 'addcoach')
 					{
-						displayError('#selectteam', $("text", xml).text());
+						id = '#coach';
 					}
 					else
 					{
-						location.reload();
+						id = '#speler';
 					}
+
+					$(id).append($('<li></li>').html(user));
 				}
-			});					
-		
-	});		
+			}
+		});					
+	});	
 	
 	$('#coachlink').click(function(e){
 		//stop the form from being submitted
@@ -194,7 +252,7 @@ $(document).ready(function(){
 		{
 			$('#darkenwrapper').fadeIn(100);
 			$('#toevoegen').fadeIn(100);
-			displayError('#toevoegenErr', "mode was null, kan geen request uitvoeren.");
+			displayMessage('#toevoegenErr', "mode was null, kan geen request uitvoeren.");
 			return;
 		}
 		
@@ -209,13 +267,13 @@ $(document).ready(function(){
 			error: function()
 			{				
 				$('#toevoegen').fadeIn(100);
-				displayError('#toevoegenErr', "Er was een fout tijdens het versturen van de HTTP request?");
+				displayMessage('#toevoegenErr', "Er was een fout tijdens het versturen van de HTTP request?");
 			},
 			success: function(xml)
 			{
 				if ($("error",xml).text() == "1")
 				{
-					displayError('#toevoegenErr', $("text", xml).text());
+					displayMessage('#toevoegenErr', $("text", xml).text());
 				}
 				else
 				{
@@ -229,7 +287,7 @@ $(document).ready(function(){
 		});		
 	}
 	
-	function displayError(id, text)
+	function displayMessage(id, text)
 	{
 		$(id).html(text);    	
 		$(id).fadeIn(500);

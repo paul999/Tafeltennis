@@ -239,6 +239,7 @@ if (allow(array(speler, coach, beheer, admin)))
 				echo '<p><a href="#" id="coachlink">Coach toevoegen</a> || <a href="#" id="spelerlink">Speler toevoegen</a></p>';
 			}
 			// Zo, alle data is daar. Nu overzichtjes maken.
+			echo '<strong>Coach(es)<strong>: <ul id="coach">';
 			
 			foreach ($coach as $c)
 			{
@@ -247,10 +248,11 @@ if (allow(array(speler, coach, beheer, admin)))
 					echo "<p>Ik heb een coach gevonden, maar geen naam :(</p>";
 					continue;
 				}
-				echo "<strong>Coach<strong>: " . $speler[$c['user']]['username'] . "<br />"; 
+				echo "<li>" . $speler[$c['user']]['username'] . "</li>"; 
 			}
+			echo '</ul>';
 			
-			echo "<strong>Spelers:</strong><ul>";
+			echo "<strong>Spelers:</strong><ul id='spelers'>";
 			foreach ($vast as $v)
 			{
 				if (!isset($speler[$c['user']]))
@@ -355,6 +357,7 @@ if (allow(array(admin, beheer), false))
 	<div id="toevoegen" class="phpbb_alert">
 		<a href="#"><img src="images/alert_close.png" class="alert_close" /></a>
 		<div id="toevoegenErr" class="error"></div>
+		<div id="toevoegenOk" class="success"></div>
 		<p>Selecteer gebruiker om toe te voegen:</p>
 		<select id="gebruikerslijst">
 
