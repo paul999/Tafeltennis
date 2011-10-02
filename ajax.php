@@ -124,17 +124,22 @@ switch ($_REQUEST['mode'])
 			}
 		}
 		
-		if ($sp < 3)
+		$sql = 'SELECT * FROM team WHERE id = '  . $team;
+		$result = mysql_query($sql) or sqlE($sql);
+		
+		$row = mysql_fetch_assoc($result);
+		
+		if ($sp < $row['minspelers'])
 		{
-			$min = 1;
+			$min = 0;
 		}		
 		else
 		{
-			$min = 0;
+			$min = 1;
 		}
 		
 		
-		$xml[] = '<text>Toegevoegd aan team ' . $team . '</text><min>' . $min . '</min>';
+		$xml[] = '<text>Toegevoegd aan team ' . $row['team'] . '</text><min>' . $min . '</min>';
 		exit;
 		
 	break;
