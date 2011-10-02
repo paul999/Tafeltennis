@@ -99,6 +99,51 @@ switch ($_REQUEST['mode'])
 	
 		exit;
 	break;
+	
+	case 'selectaddspelerlink':
+	case 'selectaddcoachlink':
+		$team = (int)$_SESSION['team'];
+		$sql = 'SELECT id, username, access FROM users u WHERE id NOT IN (SELECT user FROM teamuser WHERE team = ' . $team . ')';
+		$result = mysql_query($sql) or sqlE();
+		
+		if (mysql_num_rows($result))
+		{
+			$tmp = '';
+			
+			while ($row = mysql_fetch_assoc($result))
+			{
+				$skip = true;
+				switch ($mode)
+				{
+					case 'selectaddspelerlink':
+						if (allow(speler, false, $row['access']))
+						{
+							$skip = false;
+						}
+					break;
+					
+					case 'selectaddcoachlink':
+						if (allow(coach, false, $row['access']))
+						{
+							$skip = false;
+						}
+					break;
+				}
+				
+				if ($skip)
+				{
+					continue;
+				}
+				$tmp .= _xml($row);
+			}
+			$xml = sprintf($tmp, $xml);
+		}
+		else
+		{
+			error('Geen gebruikers gevonden die geschikt zijn.');
+		}
+		
+	break;
 		
 }
 	
@@ -118,15 +163,21 @@ function xml($result)
 	$tmp = '';
 	while ($row = mysql_fetch_assoc($result))
 	{
-		extract($row);
-		$tmp .= "<row>";
-	
-		foreach ($row as $k => $v)
-		{
-			$tmp .= "<$k>$v</$k>";
-		}
-		$tmp .= '</row>';
+		$tmp .= _xml($row);
 	}
+	return $tmp;
+}
+function _xml($row)
+{
+	extract($row);
+	$tmp = "<row>";
+
+	foreach ($row as $k => $v)
+	{
+		$tmp .= "<$k>$v</$k>";
+	}
+	$tmp .= '</row>';
+	
 	return $tmp;
 }
 function tc()
