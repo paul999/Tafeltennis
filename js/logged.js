@@ -197,11 +197,11 @@ $(document).ready(function(){
 			{
 				if ($("error",xml).text() == "1")
 				{
-					displayMessage('#toevoegenErr', $("text", xml).text());
+					displayMessage('#toevoegenErr', $("text", xml).text(), "#toevoegen");
 				}
 				else
 				{
-					displayMessage("#toevoegenOk", $("text", xml).text());
+					displayMessage("#toevoegenOk", $("text", xml).text(), "#toevoegen");
 					
 					var user = $("#gebruikerslijst :selected").text();
 					var mode = $('#mode').attr('value');
@@ -287,12 +287,17 @@ $(document).ready(function(){
 		});		
 	}
 	
-	function displayMessage(id, text)
+	function displayMessage(id, text, id2)
 	{
 		$(id).html(text);    	
 		$(id).fadeIn(500);
 
 		setTimeout(";$('" + id + "').fadeOut(500);", 5000);  
+		
+		if (id2)
+		{
+			setTimeout(";$('" + id2 + "').fadeOut(500);", 5000);  
+		}
 		console.log(text);	
 	}
 

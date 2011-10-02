@@ -100,6 +100,22 @@ switch ($_REQUEST['mode'])
 		exit;
 	break;
 	
+	case 'addspeler':
+		$mode = speler;
+	case 'addcoach':
+		$team = (int)$_SESSION['team'];
+		$speler = (int)$_POST['team'];
+		
+		if (!$mode) $mode = coach;
+		
+		$sql = "INSERT INTO teamuser SET team = $team, user = $speler, functie = $functie";
+		mysql_query($sql) or sqlE();
+		
+		$xml[] = '<text>Toegevoegd aan team ' . $team . '</text>';
+		exit;
+		
+	break;
+	
 	case 'selectaddspeler':
 	case 'selectaddcoach':
 		$team = (int)$_SESSION['team'];
