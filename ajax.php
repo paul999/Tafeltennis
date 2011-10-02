@@ -100,8 +100,8 @@ switch ($_REQUEST['mode'])
 		exit;
 	break;
 	
-	case 'selectaddspelerlink':
-	case 'selectaddcoachlink':
+	case 'selectaddspeler':
+	case 'selectaddcoach':
 		$team = (int)$_SESSION['team'];
 		$sql = 'SELECT id, username, access FROM users u WHERE id NOT IN (SELECT user FROM teamuser WHERE team = ' . $team . ')';
 		$result = mysql_query($sql) or sqlE();
@@ -142,6 +142,7 @@ switch ($_REQUEST['mode'])
 		{
 			error('Geen gebruikers gevonden die geschikt zijn.');
 		}
+		exit;
 		
 	break;
 		
