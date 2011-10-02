@@ -217,6 +217,13 @@ $(document).ready(function(){
 				{
 					displayError('#toevoegenErr', $("text", xml).text());
 				}
+				else
+				{
+					$('#gebruikerslijst').html();
+					$(xml).find('row').each(function(){
+						$('#gebruikerslijst').append($('<option></option').val(this.find('id').text()).html(this.find('username').text()));
+					})			
+				}
 				$('#toevoegen').fadeIn(100);						
 			}
 		});		
