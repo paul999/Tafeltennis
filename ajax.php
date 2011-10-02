@@ -124,7 +124,7 @@ switch ($_REQUEST['mode'])
 			}
 		}
 		
-		$sql = 'SELECT * FROM team WHERE id = '  . $team;
+		$sql = 'SELECT * FROM teams WHERE id = '  . $team;
 		$result = mysql_query($sql) or sqlE($sql);
 		
 		$row = mysql_fetch_assoc($result);
