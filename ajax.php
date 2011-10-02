@@ -116,14 +116,14 @@ switch ($_REQUEST['mode'])
 				$skip = true;
 				switch ($mode)
 				{
-					case 'selectaddspelerlink':
+					case 'selectaddspeler':
 						if (allow(speler, false, $row['access']))
 						{
 							$skip = false;
 						}
 					break;
 					
-					case 'selectaddcoachlink':
+					case 'selectaddcoach':
 						if (allow(coach, false, $row['access']))
 						{
 							$skip = false;
