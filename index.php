@@ -278,7 +278,7 @@ if (allow(array(speler, coach, beheer, admin)))
 		}
 		else
 		{
-			?><p>Selecteer rechts bovenin een team</p><?php
+			?><p>Selecteer rechts bovenin een team.</p><?php
 		}
 	}
 	echo "</div>";// End tab div.
@@ -313,9 +313,9 @@ if (allow(array(admin, beheer), false))
 		<form id="teamToevoegenform">
 			<div id="teamToevoegenOk" class="success">Team toegevoegd</div>
 			<div id="teamToevoegenErr" class="error"></div>
-			Teamnummer: <input type="text" id="teamnummer" /><br />
-			Klasse: <input type="text" id="teamklasse" /><br />
-			Poule: <input type="text" id="teampoule" /></br />
+			Teamnummer: <input type="text" id="teamnummer" /><br>
+			Klasse: <input type="text" id="teamklasse" /><br>
+			Poule: <input type="text" id="teampoule" /><br>
 			<input type="submit" id="sendteamtoevoegen" value="Opslaan"/>
 		</form>
 	</div>
@@ -325,14 +325,14 @@ if (allow(array(admin, beheer), false))
 		<form id="gebruikerToevoegenform">
 			<div id="gebruikerToevoegenOk" class="success">Gebruiker toegevoegd</div>
 			<div id="gebruikerToevoegenErr" class="error"></div>
-			Naam: <input type="text" id="naam" /><br />
-			Wachtwoord: <input type="password" id="wachtwoord" /><br />
-			Email: <input type="text" id="email" /></br />
-			Rechten:<br />
+			Naam: <input type="text" id="naam" /><br>
+			Wachtwoord: <input type="password" id="wachtwoord" /><br>
+			Email: <input type="text" id="email" /><br>
+			Rechten:<br>
 			<?php
 			foreach ($levels as $recht => $naam)
 			{			
-				echo "<input type='checkbox' value='$recht' id='r$recht'/><label for='r$recht'>$naam</label><br />";
+				echo "<input type='checkbox' value='$recht' id='r$recht'/><label for='r$recht'>$naam</label><br>";
 			}
 			?>
 			
@@ -348,17 +348,17 @@ if (allow(array(admin, beheer), false))
 	<div class="jalert" id="loadingalert"><h3>Laden...</h3><p>Een moment geduld...</p></div>
 </div>  
 	<div id="phpbb_alert" class="phpbb_alert">
-		<a href="#"><img src="images/alert_close.png" class="alert_close" /></a>
+		<a href="#"><img src="images/alert_close.png" class="alert_close" alt="" /></a>
 		<h3></h3><p></p>
 	</div>
 	<div id="phpbb_confirm" class="phpbb_alert">
-		<a href="#"><img src="images/alert_close.png" class="alert_close" /></a>
+		<a href="#"><img src="images/alert_close.png" class="alert_close" alt="" /></a>
 		<p></p>
 		<input type="button" class="button1" value="Ja" />&nbsp;
 		<input type="button" class="button2" value="Nee" />
 	</div>
 	<div id="toevoegen" class="phpbb_alert">
-		<a href="#"><img src="images/alert_close.png" class="alert_close" /></a>
+		<a href="#"><img src="images/alert_close.png" class="alert_close" alt="" /></a>
 		<div id="toevoegenErr" class="error"></div>
 		<div id="toevoegenOk" class="success"></div>
 		<p>Selecteer gebruiker om toe te voegen:</p>
