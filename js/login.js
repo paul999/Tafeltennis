@@ -31,7 +31,7 @@ $(document).ready(function(){
 			else
 			{
 				$("#formid").html($("text", xml).text());
-				location.href = location.href
+				location.reload();
 			}
 		});
 	});

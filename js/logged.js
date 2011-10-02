@@ -56,7 +56,7 @@ $(document).ready(function(){
 					else
 					{
 						$('#teamToevoegenOk').fadeIn(500);				
-						setTimeout(";$('#teamToevoegenOk').fadeOut(500);location.href = location.href", 5000);
+						setTimeout(";$('#teamToevoegenOk').fadeOut(500);location.reload();", 5000);
 					}
 				}
 			});					
@@ -119,7 +119,7 @@ $(document).ready(function(){
 					else
 					{
 						$('#gebruikerToevoegenOk').fadeIn(500);				
-						setTimeout(";$('#gebruikerToevoegenOk').fadeOut(500);location.href = location.href", 5000);
+						setTimeout(";$('#gebruikerToevoegenOk').fadeOut(500);location.reload();", 5000);
 					}
 				}
 			});					
@@ -157,7 +157,7 @@ $(document).ready(function(){
 					}
 					else
 					{
-						location.href = location.href;
+						location.reload();
 					}
 				}
 			});					
