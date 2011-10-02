@@ -144,3 +144,15 @@ h3
 {
 	margin:0;
 }
+
+.left {
+	float:left;
+	width:49%;
+	border-right: 1px solid #fff;
+	height: 100%;
+}
+.right {
+	float:right;
+	width:49%;
+	height: 100%;
+}
