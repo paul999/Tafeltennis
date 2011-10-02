@@ -210,10 +210,15 @@ $(document).ready(function(){
 					if (mode == 'addcoach')
 					{
 						id = '#coach';
+						$('#geencoach').fadeOut(100);
 					}
 					else
 					{
 						id = '#speler';
+						if ($("min", xml).text() == "1")
+						{
+							#('#geenspelers').fadeOut(100);
+						}
 					}
 
 					$(id).append($('<li></li>').html(user));
@@ -255,6 +260,7 @@ $(document).ready(function(){
 			displayMessage('#toevoegenErr', "mode was null, kan geen request uitvoeren.");
 			return;
 		}
+		$('#gebruikerslijst').html('');
 		
 		$.ajax({
 			url: 'ajax.php',
@@ -277,7 +283,6 @@ $(document).ready(function(){
 				}
 				else
 				{
-					$('#gebruikerslijst').html('');
 					$(xml).find('row').each(function(){
 						$('#gebruikerslijst').append($('<option></option').val($(this).find('id').text()).html($(this).find('username').text()));
 					})			

@@ -109,9 +109,32 @@ switch ($_REQUEST['mode'])
 		if (!isset($mode)) $mode = coach;
 		
 		$sql = "INSERT INTO teamuser SET team = $team, user = $speler, functie = $mode";
-		mysql_query($sql) or sqlE();
+		$result = mysql_query($sql) or sqlE();
 		
-		$xml[] = '<text>Toegevoegd aan team ' . $team . '</text>';
+		$sql = 'SELECT * FROM teamuser WHERE team = ' . $team;
+		$result = mysql_query($sql) or sqlE();
+		
+		$sp = 0;
+		
+		while ($row = mysql_fetch_assoc($result))
+		{
+			if ($row['functie'] == speler)
+			{
+				$sp++;
+			}
+		}
+		
+		if ($sp < 3)
+		{
+			$min = 1;
+		}		
+		else
+		{
+			$min = 0;
+		}
+		
+		
+		$xml[] = '<text>Toegevoegd aan team ' . $team . '</text><min>' . $min . '</min>';
 		exit;
 		
 	break;

@@ -212,11 +212,11 @@ if (allow(array(speler, coach, beheer, admin)))
 			
 			if (sizeof($vast) < $team['minspelers'])
 			{
-				echo '<p><strong>LETOP:</strong>Aantal spelers in dit team is lager als het minimum!</p>';
+				echo '<p id="geenspelers"><strong>LETOP:</strong>Aantal spelers in dit team is lager als het minimum!</p>';
 			}	
 			if (sizeof($coach) == 0)
 			{
-				echo "<p>Er is nog geen coach voor dit team bepaald.</p>";
+				echo "<p id='geencoach'>Er is nog geen coach voor dit team bepaald.</p>";
 			}
 			
 			if (sizeof($sp))
