@@ -197,7 +197,7 @@ if (allow(array(speler, coach, beheer, admin)))
 			
 			while ($row = mysql_fetch_assoc($result))
 			{
-				$sp[] = $row['spelerid'];
+				$sp[] = $row['user'];
 				
 				if ($row['functie'] == COACH)
 				{
