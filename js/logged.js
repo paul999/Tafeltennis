@@ -219,7 +219,7 @@ $(document).ready(function(){
 				}
 				else
 				{
-					$('#gebruikerslijst').html();
+					$('#gebruikerslijst').html('');
 					$(xml).find('row').each(function(){
 						$('#gebruikerslijst').append($('<option></option').val($(this).find('id').text()).html($(this).find('username').text()));
 					})			
