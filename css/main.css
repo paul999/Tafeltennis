@@ -127,7 +127,7 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that th
 	background: #fff;
 }
 .tab_content {
-	padding: 20px;
+	padding-left: 20px;
 }
 /** Team select box, rechts bovenaan **/
 #teamselect
@@ -148,7 +148,7 @@ h3
 .left {
 	float:left;
 	width:49%;
-	border-right: 1px solid #fff;
+	border-right: 1px solid #999;
 	height: 100%;
 }
 .right {
