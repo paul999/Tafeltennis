@@ -201,7 +201,7 @@ function tc()
 function error($str)
 {
 	global $xml;
-	$xml = sprintf($xml, "<error>1</error><text>$str</text>");
+	$xml[] = "<error>1</error><text>$str</text>";
 	exit;
 }
 function err($str)
