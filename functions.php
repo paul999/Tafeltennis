@@ -13,7 +13,7 @@ function allow($level, $die = true, $override = false)
 		
 		foreach ($level as $lvl)
 		{
-			if (allow($lvl, false))
+			if (allow($lvl, false, $override))
 			{
 				$allow = true;
 				break;

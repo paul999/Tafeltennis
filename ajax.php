@@ -1,6 +1,6 @@
 <?php
 require('config.php');
-error_reporting(0);
+//error_reporting(0);
 $average = $count = null;
 $xml = "<ajax>%s</ajax>";
 header('Content-type: text/xml'); 
@@ -117,14 +117,14 @@ switch ($_REQUEST['mode'])
 				switch ($_REQUEST['mode'])
 				{
 					case 'selectaddspeler':
-						if (allow(speler, false, $row['access']))
+						if (allow(speler, false, (int)$row['access']))
 						{
 							$skip = false;
 						}
 					break;
 					
 					case 'selectaddcoach':
-						if (allow(coach, false, $row['access']))
+						if (allow(coach, false, (int)$row['access']))
 						{
 							$skip = false;
 						}
