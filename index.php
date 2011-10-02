@@ -234,12 +234,9 @@ if (allow(array(speler, coach, beheer, admin)))
 					}
 				}
 			}
-			if (allow(array(beheer, admin), false))
-			{
-				echo '<p><a href="#" id="coachlink">Coach toevoegen</a> || <a href="#" id="spelerlink">Speler toevoegen</a></p>';
-			}
+
 			// Zo, alle data is daar. Nu overzichtjes maken.
-			echo '<strong>Coach(es)<strong>: <ul id="coach">';
+			echo '<strong>Coach(es)</strong>: <ul id="coach">';
 			
 			foreach ($coach as $c)
 			{
@@ -263,6 +260,11 @@ if (allow(array(speler, coach, beheer, admin)))
 				echo "<li>" . $speler[$v['user']]['username'] . "</li>"; 			
 			}
 			echo "</ul>";
+			
+			if (allow(array(beheer, admin), false))
+			{
+				echo '<p><a href="#" id="coachlink">Coach toevoegen</a> || <a href="#" id="spelerlink">Speler toevoegen</a></p>';
+			}			
 			
 			echo "<h2>Wedstrijden voor team " . $team['team'] . "</h2>";
 			
