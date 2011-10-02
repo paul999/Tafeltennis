@@ -276,6 +276,10 @@ if (allow(array(speler, coach, beheer, admin)))
 			
 			}
 		}
+		else
+		{
+			?><p>Selecteer rechts bovenin een team</p><?php
+		}
 	}
 	echo "</div>";// End tab div.
 }
