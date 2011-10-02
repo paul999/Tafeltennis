@@ -207,6 +207,7 @@ if (allow(array(speler, coach, beheer, admin)))
 					$vast[] = $row;
 				}
 			}
+			echo '<span class="left">';
 			echo '<h2>Teamgegevens</h2>';
 			
 			if (sizeof($vast) < $team['minspelers'])
@@ -264,7 +265,7 @@ if (allow(array(speler, coach, beheer, admin)))
 			{
 				echo '<p><a href="#" id="coachlink">Coach toevoegen</a> || <a href="#" id="spelerlink">Speler toevoegen</a></p>';
 			}			
-			
+			echo '</span><span class="right">';
 			echo "<h2>Wedstrijden voor team " . $team['team'] . "</h2>";
 			
 			if (sizeof($wedstrijden) == 0)
@@ -274,7 +275,9 @@ if (allow(array(speler, coach, beheer, admin)))
 			else
 			{
 			
+			
 			}
+			echo '</span>';
 		}
 		else
 		{
