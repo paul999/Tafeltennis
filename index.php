@@ -99,7 +99,6 @@ if (allow(array(speler, coach, beheer, admin)))
 {
 	?><div id="competitie" class="tab_content"><?php
 	
-	echo '<h1>Competitie overzicht</h1>';
 	$teams = teamAllow();
 	
 	if ($teams === false)
@@ -306,7 +305,6 @@ if (allow(array(admin, beheer), false))
 {
 	?>
 	<div id="teamtoevoegen" class="tab_content">
-		<h1>Team toevoegen</h1>
 	
 		<form id="teamToevoegenform">
 			<div id="teamToevoegenOk" class="success">Team toegevoegd</div>
@@ -319,7 +317,6 @@ if (allow(array(admin, beheer), false))
 	</div>
 
 	<div id="gebruikertoevoegen" class="tab_content">
-		<h1>Gebruiker toevoegen</h1>
 	
 		<form id="gebruikerToevoegenform">
 			<div id="gebruikerToevoegenOk" class="success">Gebruiker toegevoegd</div>
