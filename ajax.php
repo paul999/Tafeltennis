@@ -165,7 +165,7 @@ function printer()
 {
 	global $xml;
 	echo "<ajax>";
-	echo implde($xml,'');
+	echo implode($xml,'');
 	echo "</ajax>";
 	exit;
 }
