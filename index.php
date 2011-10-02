@@ -255,12 +255,12 @@ if (allow(array(speler, coach, beheer, admin)))
 			echo "<strong>Spelers:</strong><ul id='spelers'>";
 			foreach ($vast as $v)
 			{
-				if (!isset($speler[$c['user']]))
+				if (!isset($speler[$v['user']]))
 				{
 					echo "<li>Ik heb een speler gevonden, maar geen naam :(</li>";
 					continue;
 				}
-				echo "<li>" . $speler[$c['user']]['username'] . "</li>"; 			
+				echo "<li>" . $speler[$v['user']]['username'] . "</li>"; 			
 			}
 			echo "</ul>";
 			
