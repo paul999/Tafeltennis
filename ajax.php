@@ -50,8 +50,8 @@ switch ($_REQUEST['mode'])
 		
 		if (!mysql_num_rows($result))
 		{
-			$xml[] = '<error>1</error><text>Foute gebruiker</text>';
-			$_SESSION['login'] = false;					
+			$_SESSION['login'] = false;			
+			error("Foute gebruiker");					
 		}
 		else
 		{
@@ -59,8 +59,8 @@ switch ($_REQUEST['mode'])
 			
 			if (!$row || $row['password'] !== $pass)
 			{
-				$xml[] = '<error>1</error><text>Foute gebruiker</text>';
-				$_SESSION['login'] = false;					
+				$_SESSION['login'] = false;			
+				error("Foute gebruiker");
 			}
 			else
 			{
@@ -164,9 +164,9 @@ exit;
 function printer()
 {
 	global $xml;
-	echo "<ajax>";
+	echo "<ajax>\n";
 	echo implode($xml,'');
-	echo "</ajax>";
+	echo "\n</ajax>";
 	exit;
 }
 
@@ -183,13 +183,13 @@ function xml($result)
 function _xml($row)
 {
 	extract($row);
-	$tmp = "<row>";
+	$tmp = "<row>\n";
 
 	foreach ($row as $k => $v)
 	{
-		$tmp .= "<$k>$v</$k>";
+		$tmp .= "\t<$k>$v</$k>\n";
 	}
-	$tmp .= '</row>';
+	$tmp .= '</row>\n';
 	
 	return $tmp;
 }
