@@ -114,7 +114,7 @@ switch ($_REQUEST['mode'])
 			while ($row = mysql_fetch_assoc($result))
 			{
 				$skip = true;
-				switch ($mode)
+				switch ($_REQUEST['mode'])
 				{
 					case 'selectaddspeler':
 						if (allow(speler, false, $row['access']))
