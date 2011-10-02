@@ -104,11 +104,11 @@ switch ($_REQUEST['mode'])
 		$mode = speler;
 	case 'addcoach':
 		$team = (int)$_SESSION['team'];
-		$speler = (int)$_POST['team'];
+		$speler = (int)$_POST['user'];
 		
-		if (!$mode) $mode = coach;
+		if (!isset($mode)) $mode = coach;
 		
-		$sql = "INSERT INTO teamuser SET team = $team, user = $speler, functie = $functie";
+		$sql = "INSERT INTO teamuser SET team = $team, user = $speler, functie = $mode";
 		mysql_query($sql) or sqlE();
 		
 		$xml[] = '<text>Toegevoegd aan team ' . $team . '</text>';
