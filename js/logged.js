@@ -217,7 +217,7 @@ $(document).ready(function(){
 						id = '#speler';
 						if ($("min", xml).text() == "1")
 						{
-							#('#geenspelers').fadeOut(100);
+							$('#geenspelers').fadeOut(100);
 						}
 					}
 
