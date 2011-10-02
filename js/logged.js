@@ -221,7 +221,7 @@ $(document).ready(function(){
 				{
 					$('#gebruikerslijst').html();
 					$(xml).find('row').each(function(){
-						$('#gebruikerslijst').append($('<option></option').val(this.find('id').text()).html(this.find('username').text()));
+						$('#gebruikerslijst').append($('<option></option').val($(this).find('id').text()).html($(this).find('username').text()));
 					})			
 				}
 				$('#toevoegen').fadeIn(100);						

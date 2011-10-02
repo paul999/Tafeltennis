@@ -189,7 +189,7 @@ function _xml($row)
 	{
 		$tmp .= "\t<$k>$v</$k>\n";
 	}
-	$tmp .= '</row>\n';
+	$tmp .= "</row>\n";
 	
 	return $tmp;
 }
