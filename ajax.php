@@ -2,7 +2,7 @@
 require('config.php');
 //error_reporting(0);
 $average = $count = null;
-$xml = "<ajax>%s</ajax>";
+$xml = array();
 header('Content-type: text/xml'); 
 register_shutdown_function ('printer');
 	
@@ -30,14 +30,14 @@ switch ($_REQUEST['mode'])
 		$sql = "INSERT INTO teams SET naam = '$naam', team = $nummer, minspelers = 3, poule = '$poule', klasse = '$klasse'";
 		mysql_query($sql) or err(mysql_error());
 		
-		$xml = sprintf('<text>Team toegevoegd</text>', $xml);
+		$xml[] = '<text>Team toegevoegd</text>';
 		exit;
 	break;
 	
 	case 'selectteam':
 		$_SESSION['team'] = (int)$_POST['team'];
 		
-		$xml = sprintf('<text>Done</text>', $xml);
+		$xml[] = '<text>Done</text>';
 		exit;
 	break;
 
@@ -50,7 +50,7 @@ switch ($_REQUEST['mode'])
 		
 		if (!mysql_num_rows($result))
 		{
-			$xml = sprintf($xml, '<error>1</error><text>Foute gebruiker</text>');
+			$xml[] = '<error>1</error><text>Foute gebruiker</text>';
 			$_SESSION['login'] = false;					
 		}
 		else
@@ -59,12 +59,12 @@ switch ($_REQUEST['mode'])
 			
 			if (!$row || $row['password'] !== $pass)
 			{
-				$xml = sprintf($xml, '<error>1</error><text>Foute gebruiker</text>');
+				$xml[] = '<error>1</error><text>Foute gebruiker</text>';
 				$_SESSION['login'] = false;					
 			}
 			else
 			{
-				$xml = sprintf($xml, '<text>Ingelogd</text>');
+				$xml[] = '<text>Ingelogd</text>';
 				$_SESSION['login'] = true;	
 				$_SESSION['id'] = $row['id'];					
 			}
@@ -94,7 +94,7 @@ switch ($_REQUEST['mode'])
 		$sql = "INSERT INTO users SET username = '$naam', access = $recht, `password` = '$ww', email = '$email'";
 		mysql_query($sql) or err(mysql_error());
 		
-		$xml = sprintf('<text>Gebruiker toegevoegd</text>', $xml);
+		$xml[] = '<text>Gebruiker toegevoegd</text>';
 		exit;	
 	
 		exit;
@@ -146,7 +146,7 @@ switch ($_REQUEST['mode'])
 			
 			if ($found)
 			{
-				$xml = sprintf($tmp, $xml);
+				$xml[] = $tmp;
 				exit;
 			}
 		}
@@ -164,7 +164,9 @@ exit;
 function printer()
 {
 	global $xml;
-	echo $xml;
+	echo "<ajax>";
+	echo implde($xml,'');
+	echo "</ajax>";
 	exit;
 }
 
