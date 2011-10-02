@@ -129,6 +129,11 @@ switch ($_REQUEST['mode'])
 							$skip = false;
 						}
 					break;
+					
+					default:
+					{
+						error("Invalid mode? Hoe kwam je hier nu weer...");	
+					}
 				}
 				
 				if ($skip)
