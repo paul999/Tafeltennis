@@ -186,7 +186,6 @@ $(document).ready(function(){
 			beforeSend: function() { $.loading_alert(); },
 			complete: function() { 
 				$('#loadingalert').fadeOut(100);
-				$('#darkenwrapper').fadeOut(100); 
 				$('#gebruikersbutton').attr({'disabled' : false, 'value' : 'Opslaan' }); 		 
 			},
 			error: function()
@@ -214,7 +213,7 @@ $(document).ready(function(){
 					}
 					else
 					{
-						id = '#speler';
+						id = '#spelers';
 						if ($("min", xml).text() == "1")
 						{
 							$('#geenspelers').fadeOut(100);
@@ -301,7 +300,7 @@ $(document).ready(function(){
 		
 		if (id2)
 		{
-			setTimeout(";$('" + id2 + "').fadeOut(500);", 5000);  
+			setTimeout(";$('" + id2 + "').fadeOut(500);$('#darkenwrapper').fadeOut(500);", 3000);  
 		}
 		console.log(text);	
 	}
