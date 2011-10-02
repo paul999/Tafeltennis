@@ -109,6 +109,7 @@ switch ($_REQUEST['mode'])
 		if (mysql_num_rows($result))
 		{
 			$tmp = '';
+			$found = false;
 			
 			while ($row = mysql_fetch_assoc($result))
 			{
@@ -135,13 +136,17 @@ switch ($_REQUEST['mode'])
 					continue;
 				}
 				$tmp .= _xml($row);
+				$found = true;
 			}
-			$xml = sprintf($tmp, $xml);
+			
+			if ($found)
+			{
+				$xml = sprintf($tmp, $xml);
+				exit;
+			}
 		}
-		else
-		{
-			error('Geen gebruikers gevonden die geschikt zijn.');
-		}
+		error('Geen gebruikers gevonden die geschikt zijn.');
+		
 		exit;
 		
 	break;
