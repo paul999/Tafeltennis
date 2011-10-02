@@ -166,39 +166,61 @@ $(document).ready(function(){
 	
 	$('#coachlink').click(function(e){
 		//stop the form from being submitted
-		e.preventDefault();
-			
-		if ($('#darkenwrapper').is(':visible'))
-		{
-			$('#toevoegen').fadeIn(100);
-		}
-		else
-		{
-			$('#toevoegen').show();
-			$('#darkenwrapper').fadeIn(100);
-		}	
+		e.preventDefault();	
 		
 		$('#mode').attr('value', 'addcoach');
 		
-				
+		getSelectList();
+		
+		
 	});	
 
 	$('#spelerlink').click(function(e){
 		//stop the form from being submitted
 		e.preventDefault();
 			
-		if ($('#darkenwrapper').is(':visible'))
-		{
-			$('#toevoegen').fadeIn(100);
-		}
-		else
-		{
-			$('#toevoegen').show();
-			$('#darkenwrapper').fadeIn(100);
-		}	
 		$('#mode').attr('value', 'addspeler');
+		
+		getSelectList();
 				
 	});	
+	
+	function getSelectList()
+	{
+		var mode = $('#mode').attr('value');
+		mode = "select" + mode;
+		
+		if (mode == undefined || mode == null)
+		{
+			$('#darkenwrapper').fadeIn(100);
+			$('#toevoegen').fadeIn(100);
+			displayError('#toevoegenErr', "mode was null, kan geen request uitvoeren.");
+			return;
+		}
+		
+		$.ajax({
+			url: 'ajax.php',
+			data: {'mode': mode},
+			type: 'POST',
+			beforeSend: function() { $.loading_alert(); },
+			complete: function() { 
+				$('#loadingalert').fadeOut(100);
+			},
+			error: function()
+			{				
+				$('#toevoegen').fadeIn(100);
+				displayError('#toevoegenErr', "Er was een fout tijdens het versturen van de HTTP request?");
+			},
+			success: function(xml)
+			{
+				if ($("error",xml).text() == "1")
+				{
+					displayError('#toevoegenErr', $("text", xml).text());
+				}
+				$('#toevoegen').fadeIn(100);						
+			}
+		});		
+	}
 	
 	function displayError(id, text)
 	{

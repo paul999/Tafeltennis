@@ -354,17 +354,10 @@ if (allow(array(admin, beheer), false))
 	</div>
 	<div id="toevoegen" class="phpbb_alert">
 		<a href="#"><img src="images/alert_close.png" class="alert_close" /></a>
+		<div id="toevoegenErr" class="error"></div>
 		<p>Selecteer gebruiker om toe te voegen:</p>
 		<select id="gebruikerslijst">
-			<?php
-			$sql = "SELECT * FROM users ORDER BY username";
-			$result = mysql_query($sql) or sqlE();
-			
-			while ($row = mysql_fetch_assoc($result))
-			{
-				echo "<option value='{$row['id']}'>{$row['username']}</option>";
-			}
-			?>
+
 		</select>
 		<input type="hidden" id="mode" value="" />
 		<input type="button" id="gebruikersbutton" value="Opslaan" />
